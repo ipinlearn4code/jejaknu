@@ -3,7 +3,7 @@
     <nav class="navbar navbar-expand-lg bg-white navbar-light sticky-top py-lg-0 px-lg-5 wow fadeIn" data-wow-delay="0.1s">
         <a href="/" class="navbar-brand ms-4 ms-lg-0">
             
-        <h1 class="m-0" style="color: #15B392;"><img class="me-3" src="img/icons/logonu.png" alt="Icon" width="100">JEJAKMU</h1>
+        <h1 class="m-0" style="color: #15B392;"><img class="me-3" src="img/icons/logonu.png" alt="Icon" width="100">JEJAKNU</h1>
 
         </a>
         <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
@@ -11,7 +11,7 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <div class="navbar-nav ms-auto p-4 p-lg-0">
-                <a href="<?php echo base_url('cadre'); ?>" class="nav-item nav-link active">Data Kader</a>
+                <a href="<?php echo base_url('cadre'); ?>" class="nav-item nav-link active">Profil Kader</a>
                
 
                 <div class="nav-item dropdown">

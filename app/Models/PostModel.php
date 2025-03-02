@@ -19,8 +19,27 @@ class PostModel extends Model
     public function getLatestPublishedPosts($limit = 3)
     {
         return $this->where('status', 'published')
-                    ->orderBy('created_at', 'DESC')
-                    ->limit($limit)
-                    ->find();
+            ->orderBy('created_at', 'DESC')
+            ->limit($limit)
+            ->find();
     }
+
+
+    /**
+     * Ambil berita terbaru dengan status 'published'
+     *
+     * @param int $limit Jumlah berita yang ingin diambil
+     * @return array
+     */
+    public function getLatestPublishedByCategory($limit = 3, $category = null)
+    {
+        return $this->select('posts.*')
+            ->join('categories', 'categories.id = posts.category_id')
+            ->where('posts.status', 'published')
+            ->where('categories.name', $category)
+            ->orderBy('posts.created_at', 'DESC')
+            ->limit($limit)
+            ->find();
+    }
+
 }

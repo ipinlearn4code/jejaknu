@@ -21,7 +21,7 @@ class AuthController extends BaseController
         $userModel->insert([
             'email' => $email,
             'password' => $password,
-            'role' => null // Default user tidak memiliki role
+            'role' => 'member' // Default user tidak memiliki role
         ]);
 
         return $this->response->setJSON(['message' => 'Registrasi berhasil, silakan login!']);
@@ -45,15 +45,15 @@ class AuthController extends BaseController
         session()->set([
             'user_id' => $user['id'],
             'email' => $user['email'],
-            'role' => $user['role'], // Bisa null atau 'admin'
+            'role' => $user['role'], 
             'logged_in' => true,
         ]);
 
         // Redirect berdasarkan role
         if ($user['role'] === 'superadmin') {
-            return $this->response->setJSON(['redirect' => base_url('/datakader')]);
-        } else {
-            return $this->response->setJSON(['redirect' => base_url('/dashboard')]);
+            return $this->response->setJSON(['redirect' => base_url('/')]);
+        } else if ($user['role'] === 'member') {
+            return $this->response->setJSON(['redirect' => base_url('/')]);
         }
     }
 

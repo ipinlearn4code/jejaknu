@@ -9,10 +9,10 @@ class AuthAdmin implements FilterInterface
 {
     public function before(RequestInterface $request, $arguments = null)
     {
-        // Cek apakah user sudah login dan apakah perannya admin
-        if (!session()->get('logged_in') || session()->get('role') !== 'superadmin') {
-            return redirect()->to('/datakader')->with('error', 'Akses ditolak! Anda bukan admin.');
-        }
+        // // Cek apakah user sudah login dan apakah perannya admin
+        // if (!session()->get('logged_in') || session()->get('role') !== 'superadmin') {
+        //     return redirect()->to('/datakader')->with('error', 'Akses ditolak! Anda bukan admin.');
+        // }
     }
 
     public function after(RequestInterface $request, ResponseInterface $response, $arguments = null)

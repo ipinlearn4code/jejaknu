@@ -60,52 +60,47 @@
 
     <!-- Carousel Start -->
    <!-- Carousel Start -->
-<div class="container-fluid p-0 pb-5 wow fadeIn" data-wow-delay="0.1s">
+   <div class="container-fluid p-0 pb-5 wow fadeIn" data-wow-delay="0.1s">
     <div class="owl-carousel header-carousel position-relative">
-        <div class="owl-carousel-item position-relative" data-dot="<img src='img/nu1.jpg'>">
-            <img class="img-fluid carousel-img" src="img/nu1.jpg" alt="">
-            <div class="owl-carousel-inner">
-                <div class="container">
-                    <div class="row justify-content-start">
-                        <div class="col-10 col-lg-8">
-                            <h1 class="display-4 text-white animated slideInDown">JEJAKMU</h1>
-                            <p class="fs-6 fw-medium text-white mb-3 pb-2">Vero elitr justo clita lorem. Ipsum dolor at sed stet sit diam no.</p>
-                            <a href="" class="btn btn-primary py-2 px-4 animated slideInLeft">Read More</a>
+        <?php if (! empty($articles) && is_array($articles)) : ?>
+            <?php foreach ($articles as $item) : ?>
+                <div class="owl-carousel-item position-relative" data-dot="<img src='<?= esc($item['featured_image']) ?>'>">
+                    <img class="img-fluid carousel-img" src="<?= esc($item['featured_image']) ?>" alt="<?= esc($item['title']) ?>">
+                    <div class="owl-carousel-inner">
+                        <div class="container">
+                            <div class="row justify-content-start">
+                                <div class="col-10 col-lg-8">
+                                    <h1 class="display-4 text-white animated slideInDown"><?= esc($item['title']) ?></h1>
+                                    <p class="fs-6 fw-medium text-white mb-3 pb-2">
+                                        <?= esc(word_limiter($item['content'], 20)) ?>
+                                    </p>
+                                    <a href="<?= base_url('posts/show/' . $item['id']) ?>" class="btn btn-primary py-2 px-4 animated slideInLeft">
+                                        Read More
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+        <?php else: ?>
+            <div class="owl-carousel-item position-relative">
+                <img class="img-fluid carousel-img" src="img/default.jpg" alt="No posts available">
+                <div class="owl-carousel-inner">
+                    <div class="container">
+                        <div class="row justify-content-start">
+                            <div class="col-10 col-lg-8">
+                                <h1 class="display-4 text-white animated slideInDown">No Articles Found</h1>
+                                <p class="fs-6 fw-medium text-white mb-3 pb-2">There are currently no articles available.</p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="owl-carousel-item position-relative" data-dot="<img src='img/nu2.jpg'>">
-            <img class="img-fluid carousel-img" src="img/nu2.jpg" alt="">
-            <div class="owl-carousel-inner">
-                <div class="container">
-                    <div class="row justify-content-start">
-                        <div class="col-10 col-lg-8">
-                            <h1 class="display-4 text-white animated slideInDown">JEJAKMU</h1>
-                            <p class="fs-6 fw-medium text-white mb-3 pb-2">Vero elitr justo clita lorem. Ipsum dolor at sed stet sit diam no.</p>
-                            <a href="" class="btn btn-primary py-2 px-4 animated slideInLeft">Read More</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="owl-carousel-item position-relative" data-dot="<img src='img/image 3.jpg'>">
-            <img class="img-fluid carousel-img" src="img/image 3.jpg" alt="">
-            <div class="owl-carousel-inner">
-                <div class="container">
-                    <div class="row justify-content-start">
-                        <div class="col-10 col-lg-8">
-                            <h1 class="display-4 text-white animated slideInDown">JEJAKMU</h1>
-                            <p class="fs-6 fw-medium text-white mb-3 pb-2">Vero elitr justo clita lorem. Ipsum dolor at sed stet sit diam no.</p>
-                            <a href="" class="btn btn-primary py-2 px-4 animated slideInLeft">Read More</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <?php endif; ?>
     </div>
 </div>
+
 <!-- Carousel End -->
 
 <style>
@@ -147,7 +142,7 @@ p {
                 </div>
                 <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
                     <h4 class="section-title">Tentang Kami</h4>
-                    <h1 class="display-5 mb-4">Pengurus Cabang Nahdlatul Ulama</h1>
+                    <h1 class="display-5 mb-4">Pengurus Cabang Nahdlatul Ulama Malang</h1>
                     <p><p>PCNU berkomitmen untuk membangun masyarakat yang berlandaskan pada nilai-nilai Ahlussunnah wal Jama’ah. Melalui berbagai program keagamaan, pendidikan, sosial, dan ekonomi, kami berupaya untuk memberikan manfaat nyata bagi umat.</p></p>
                     <p class="mb-4">Dengan semangat kebersamaan, PCNU terus berperan aktif dalam meningkatkan kesejahteraan masyarakat serta memperkuat ukhuwah Islamiyah, wathoniyah, dan basyariyah. Kami percaya bahwa melalui kerja sama dan dedikasi, kita dapat membangun peradaban yang lebih baik.</p>
                     <div class="d-flex align-items-center mb-5">
@@ -251,16 +246,16 @@ p {
             <h3 class="fw-bold">Stay Updated</h3>
         </div>
         <div class="row row-cols-1 row-cols-md-3 g-2">
-            <?php if (! empty($posts) && is_array($posts)) : ?>
-                <?php foreach ($posts as $post) : ?>
+            <?php if (! empty($news) && is_array($news)) : ?>
+                <?php foreach ($news as $newsdisplay) : ?>
                     <div class="col">
                         <div class="card border-0 shadow-sm rounded-pill h-100 news-card">
                             <!-- <img src="<//?= esc($post['featured_image']) ?>" class="card-img-top rounded-top-pill" alt="<//?= esc($post['title']) ?>"> -->
-                            <img src="uploads/cover1.jpg" class="card-img-top rounded-top-pill" alt="<?= esc($post['title']) ?>">
+                            <img src="<?= esc($newsdisplay['featured_image']) ?>" class="card-img-top rounded-top-pill" alt="<?= esc($newsdisplay['title']) ?>">
                             <div class="card-body">
-                                <h6 class="card-title fw-bold"><?= esc($post['title']) ?></h6>
+                                <h6 class="card-title fw-bold"><?= esc($newsdisplay['title']) ?></h6>
                                 <p class="card-text text-muted small">
-                                    <?= esc(word_limiter($post['content'], 10)) ?>
+                                    <?= esc(word_limiter($newsdisplay['content'], 10)) ?>
                                 </p>
                             </div>
                         </div>

@@ -39,7 +39,20 @@ class PostController extends Controller
     // Return latest published posts (limit 3)
     public function getLatestPosts()
     {
-        $data['posts'] = $this->postModel->getLatestPublishedPosts(3);
+        $data = $this->postModel->getLatestPublishedPosts(3);
+        return $data;
+    }
+    
+    // Return latest published news (limit 3)
+    public function getLatestNews()
+    {
+        $data = $this->postModel->getLatestPublishedByCategory(3, 'news');
+        return $data;
+    }
+    
+    public function getLatestArticles()
+    {
+        $data = $this->postModel->getLatestPublishedByCategory(3, 'articles');
         return $data;
     }
 

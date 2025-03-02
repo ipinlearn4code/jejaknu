@@ -16,7 +16,7 @@
                 </div>
                 <div class="col-lg-3 col-md-6">
                 <h3 class="text-white mb-4">Layanan</h3>
-                <a class="btn btn-link text-white" href="#">Profil Kader</a>
+                <a class="btn btn-link text-white" href="cadre">Profil Kader</a>
                 <a class="btn btn-link text-white" href="#">Kegiatan & Event</a>
                 <a class="btn btn-link text-white" href="#">Berita Terkini</a>
                 <a class="btn btn-link text-white" href="#">Penghargaan</a>
