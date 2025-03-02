@@ -1,64 +1,85 @@
 <?= $this->include('layouts/header') ?>
 <?= $this->include('layouts/navbar') ?>
 
-<div class="bg-container">
-    <div class="overlay"></div> <!-- Overlay transparan -->
+<!DOCTYPE html>
+<html lang="id">
 
-    <div class="container d-flex justify-content-center align-items-center vh-100">
-        <div class="col-lg-6">
-            <div class="card shadow-lg border-0 rounded-4">
-                <div class="card-body p-5">
-                    <h3 class="text-center mb-4 text-primary fw-bold">Edit Profil Kader</h3>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Kader</title>
+    
+    <!-- Pemanggilan CSS dengan base_url() -->
+    <link rel="stylesheet" href="<?= base_url('css/bootstrap.min.css') ?>">
+    <link rel="stylesheet" href="<?= base_url('css/style.css') ?>">
+</head>
 
-                    <p class="text-center text-muted mb-4">
-                        “Perbarui data kader sesuai dengan informasi yang benar.” 🌟
-                    </p>
+<body>
+    <?php $userRole = session()->get('role'); ?>
 
-                    <!-- Adjust the action URL accordingly (for example, using the id of the kader) -->
-                    <form action="<?= base_url('kader/update/' . $kader['id']) ?>" method="POST">
-                        <?= csrf_field() ?>
-                        <!-- Use a hidden field for PUT method if necessary -->
-                        <input type="hidden" name="_method" value="PUT">
-                        
-                        <div class="mb-3">
-                            <label for="nik" class="fw-semibold">NIK</label>
-                            <input type="text" class="form-control input-custom" id="nik" name="nik" 
-                                   value="<?= esc($kader['nik']) ?>" required>
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="nama" class="fw-semibold">Nama</label>
-                            <input type="text" class="form-control input-custom" id="name" name="name" 
-                                   value="<?= esc($kader['name']) ?>" required>
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="alamat" class="fw-semibold">Alamat</label>
-                            <textarea class="form-control input-custom" id="address" name="address" rows="3" 
-                                      required><?= esc($kader['address']) ?></textarea>
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="lulusan" class="fw-semibold">Lulusan</label>
-                            <input type="text" class="form-control input-custom" id="education" name="education" 
-                                   value="<?= esc($kader['education']) ?>" required>
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="keahlian" class="fw-semibold">Keahlian</label>
-                            <input type="text" class="form-control input-custom" id="keahlian" name="skill" 
-                                   value="<?= esc($kader['skills']) ?>" required>
-                        </div>
-
-                        <div class="text-center">
-                            <button type="submit" class="btn btn-primary btn-lg rounded-5 px-5 mt-3 shadow-sm">Perbarui Profil</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
+    <div class="container-fluid mt-5">
+        <h2 class="text-center mb-4">Daftar Kader</h2>
+        <div class="d-flex justify-content-end mb-3">
+            <?php if ($userRole === 'superadmin'): ?>
+                <a href="<?= base_url('daftarkader') ?>" class="btn btn-primary">Tambah Kader</a>
+            <?php endif; ?>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped w-100">
+                <thead class="table-dark">
+                    <tr>
+                        <?php if ($userRole === 'superadmin'): ?>
+                            <th>NIK</th>
+                        <?php endif; ?>
+                        <th>Nama</th>
+                        <th>Alamat</th>
+                        <th>Lulusan</th>
+                        <th>Keahlian</th>
+                        <?php if ($userRole === 'superadmin'): ?>
+                            <th>Aksi</th>
+                        <?php endif; ?>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php if (isset($Cadres) && count($Cadres) > 0): ?>
+                        <?php foreach ($Cadres as $k): ?>
+                            <tr>
+                                <?php if ($userRole === 'superadmin'): ?>
+                                    <td><?= esc($k['nik']) ?></td>
+                                <?php endif; ?>
+                                <td><?= esc($k['name']) ?></td>
+                                <td><?= esc($k['address']) ?></td>
+                                <td><?= esc($k['education']) ?></td>
+                                <td><?= esc($k['skills']) ?></td>
+                                <?php if ($userRole === 'superadmin'): ?>
+                                    <td>
+                                        <a href="<?= base_url('cadre/' . $k['id'] . '/edit') ?>" class="btn btn-warning btn-sm">Edit</a>
+                                        <form action="<?= base_url('cadre/' . $k['id']) ?>" method="post" class="d-inline" onsubmit="return confirm('Yakin ingin menghapus?')">
+                                            <?= csrf_field() ?>
+                                            <input type="hidden" name="_method" value="DELETE">
+                                            <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
+                                        </form>
+                                    </td>
+                                <?php endif; ?>
+                            </tr>
+                        <?php endforeach; ?>
+                    <?php else: ?>
+                        <tr>
+                            <td colspan="<?= ($userRole === 'superadmin') ? 6 : 4 ?>" class="text-center">Tidak ada data kader.</td>
+                        </tr>
+                    <?php endif; ?>
+                </tbody>
+            </table>
         </div>
     </div>
-</div>
+
+    <!-- Pastikan Bootstrap JS juga dimuat jika menggunakan komponen Bootstrap yang memerlukan JS -->
+    <script src="<?= base_url('js/bootstrap.bundle.min.js') ?>"></script>
+</body>
+
+</html>
+
+
 
 <style>
     html,
