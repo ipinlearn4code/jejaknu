@@ -20,7 +20,7 @@ $routes->get('/news', 'FrontController::news');
 $routes->get('/artikel', 'FrontController::artikel');
 
 
-
+$routes->get('/session-debug', 'AuthController::sessionDebug');
 $routes->post('/registerProcess', 'AuthController::registerProcess');
 $routes->post('/loginProcess', 'AuthController::loginProcess');
 $routes->get('/logout', 'AuthController::logout');

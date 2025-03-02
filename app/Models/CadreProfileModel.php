@@ -22,5 +22,14 @@ class CadreProfileModel extends Model
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';
 
+    protected $validationRules = [
+        'nik' => 'required|is_unique[cadre_profiles.nik]'
+    ];
+    
+    protected $validationMessages = [
+        'nik' => [
+            'is_unique' => 'NIK sudah digunakan!'
+        ]
+    ];
     
 }

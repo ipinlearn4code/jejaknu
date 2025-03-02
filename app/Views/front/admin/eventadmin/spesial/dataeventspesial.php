@@ -1,6 +1,6 @@
 <?php
  include(__DIR__ . '/../../../../layouts/header.php');
- include(__DIR__ . '/../../../../layouts/navbar2.php');
+ include(__DIR__ . '/../../../../layouts/navbar.php');
 ?>
 
 <!DOCTYPE html>

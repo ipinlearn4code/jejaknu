@@ -19,19 +19,28 @@ class UserModel extends Model
         'updated_at',
     ];
 
-    // Automatically manage created_at and updated_at
-    protected $useTimestamps = false; 
-    // or set to true if you want CI4 to manage them automatically
-    // then define the fields as below:
-    // protected $createdField  = 'created_at';
-    // protected $updatedField  = 'updated_at';
-
-    /**
-     * Optionally, you can add methods for user-specific logic,
-     * such as finding a user by email, etc.
-     */
+    protected $useTimestamps = true; 
     public function findByEmail(string $email)
     {
         return $this->where('email', $email)->first();
     }
+
+    protected $validationRules = [
+        'username' => 'required|is_unique[users.username]',
+        'email' => 'required|valid_email|is_unique[users.email]',
+        'password_hash' => 'required|min_length[8]'
+    ];
+    
+    protected $validationMessages = [
+        'username' => [
+            'is_unique' => 'Username sudah digunakan!'
+        ],
+        'email' => [
+            'is_unique' => 'Email sudah terdaftar!'
+        ],
+        'password_hash' => [
+            'min_length' => 'Password minimal 8 karakter!'
+        ]
+    ];
+    
 }

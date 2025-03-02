@@ -1,5 +1,5 @@
 <?= $this->include('layouts/header') ?>
-<?= $this->include('layouts/navbar2') ?>
+<?= $this->include('layouts/navbar') ?>
 
 <div class="bg-container">
     <div class="overlay"></div> <!-- Overlay transparan -->

@@ -8,7 +8,7 @@ class PostModel extends Model
 {
     protected $table = 'posts'; // Nama tabel di database
     protected $primaryKey = 'id';
-    protected $allowedFields = ['title', 'slug', 'content', 'featured_image', 'status', 'created_at'];
+    protected $allowedFields = ['title', 'content', 'featured_image', 'status', 'category'];
 
     /**
      * Ambil postingan terbaru dengan status 'published'
@@ -34,12 +34,10 @@ class PostModel extends Model
     public function getLatestPublishedByCategory($limit = 3, $category = null)
     {
         return $this->select('posts.*')
-            ->join('categories', 'categories.id = posts.category_id')
             ->where('posts.status', 'published')
-            ->where('categories.name', $category)
+            ->where('posts.category', $category)
             ->orderBy('posts.created_at', 'DESC')
             ->limit($limit)
             ->find();
     }
-
 }

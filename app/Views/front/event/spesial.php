@@ -10,14 +10,14 @@ include(__DIR__ . '/../../layouts/navbar.php');
     <div class="row">
         <?php 
         // Data event sementara (bisa diganti dengan database)
-        $events = [
-            ["title" => "Seminar Kebangsaan", "desc" => "Seminar nasional membahas peran pemuda dalam pembangunan bangsa.", "img" => "seminar.jpg", "date" => "20 Mei 2025", "link" => base_url('/event/spesial/seminar')],
-            ["title" => "Hari Santri Nasional", "desc" => "Perayaan Hari Santri dengan berbagai kegiatan religius dan kebangsaan.", "img" => "santri.jpg", "date" => "22 Oktober 2025", "link" => base_url('/event/spesial/santri')],
-            ["title" => "Festival Budaya", "desc" => "Acara menampilkan seni dan budaya lokal untuk memperkenalkan warisan budaya.", "img" => "festival.jpg", "date" => "10 Agustus 2025", "link" => base_url('/event/spesial/festival')],
-            ["title" => "Pelatihan Digital Marketing", "desc" => "Workshop eksklusif untuk meningkatkan keterampilan digital kader.", "img" => "digital.jpg", "date" => "5 Juli 2025", "link" => base_url('/event/spesial/digital')],
-            ["title" => "Bakti Sosial Ramadan", "desc" => "Kegiatan amal selama Ramadan dengan berbagi makanan dan santunan.", "img" => "ramadan.jpg", "date" => "Ramadan 2025", "link" => base_url('/event/spesial/baksos')],
-            ["title" => "Peringatan Hari Pahlawan", "desc" => "Upacara dan seminar mengenang jasa para pahlawan bangsa.", "img" => "pahlawan.jpg", "date" => "10 November 2025", "link" => base_url('/event/spesial/pahlawan')]
-        ];
+        // $events = [
+        //     ["title" => "Seminar Kebangsaan", "desc" => "Seminar nasional membahas peran pemuda dalam pembangunan bangsa.", "img" => "seminar.jpg", "date" => "20 Mei 2025", "link" => base_url('/event/spesial/seminar')],
+        //     ["title" => "Hari Santri Nasional", "desc" => "Perayaan Hari Santri dengan berbagai kegiatan religius dan kebangsaan.", "img" => "santri.jpg", "date" => "22 Oktober 2025", "link" => base_url('/event/spesial/santri')],
+        //     ["title" => "Festival Budaya", "desc" => "Acara menampilkan seni dan budaya lokal untuk memperkenalkan warisan budaya.", "img" => "festival.jpg", "date" => "10 Agustus 2025", "link" => base_url('/event/spesial/festival')],
+        //     ["title" => "Pelatihan Digital Marketing", "desc" => "Workshop eksklusif untuk meningkatkan keterampilan digital kader.", "img" => "digital.jpg", "date" => "5 Juli 2025", "link" => base_url('/event/spesial/digital')],
+        //     ["title" => "Bakti Sosial Ramadan", "desc" => "Kegiatan amal selama Ramadan dengan berbagi makanan dan santunan.", "img" => "ramadan.jpg", "date" => "Ramadan 2025", "link" => base_url('/event/spesial/baksos')],
+        //     ["title" => "Peringatan Hari Pahlawan", "desc" => "Upacara dan seminar mengenang jasa para pahlawan bangsa.", "img" => "pahlawan.jpg", "date" => "10 November 2025", "link" => base_url('/event/spesial/pahlawan')]
+        // ];
         ?>
 
         <?php foreach ($events as $event) : ?>

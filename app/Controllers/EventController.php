@@ -16,7 +16,18 @@ class EventController extends ResourceController
         $data['events'] = $this->model->orderBy('created_at', 'DESC')->findAll();
         return view('events/index', $data);
     }
+    
+    public function eventRutin()
+    {
+        $data['events'] = $this->model->where('category', 'Rutin')->orderBy('created_at', 'DESC')->findAll();
+        return view('event/rutin', $data);
+    }
 
+    public function eventSpesial()
+    {
+        $data['events'] = $this->model->where('category', 'Spesial')->orderBy('created_at', 'DESC')->findAll();
+        return view('event/spesial', $data);
+    }
     // GET /events/new
     public function new()
     {

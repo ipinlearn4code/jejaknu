@@ -52,7 +52,7 @@ class PostController extends Controller
     
     public function getLatestArticles()
     {
-        $data = $this->postModel->getLatestPublishedByCategory(3, 'articles');
+        $data = $this->postModel->getLatestPublishedByCategory(3, 'article');
         return $data;
     }
 
