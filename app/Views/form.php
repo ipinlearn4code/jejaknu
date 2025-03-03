@@ -1,6 +1,10 @@
+<?= $this->include('layouts/header') ?>
+<?= $this->include('layouts/navbar') ?>
 <script src="https://cdn.ckeditor.com/ckeditor5/41.4.2/classic/ckeditor.js"></script>
 
 <body>
+<link rel="stylesheet" href="<?= base_url('css/bootstrap.min.css') ?>">
+<link rel="stylesheet" href="<?= base_url('css/style.css') ?>">
     <div class="card-body">
         <form action="action/process_article.php" method="post" enctype="multipart/form-data"
             onsubmit="submitEditorContent()">
@@ -64,3 +68,4 @@
         </d>
     </div>
 </body>
+<?= $this->include('layouts/footer') ?>
