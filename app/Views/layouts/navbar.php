@@ -12,6 +12,9 @@
     <div class="collapse navbar-collapse" id="navbarCollapse">
         <div class="navbar-nav ms-auto p-4 p-lg-0">
             <a href="<?php echo base_url('/dashboard'); ?>" class="nav-item nav-link active">Dashboard</a>
+            <?php if (in_array(session()->get('role'), ['admin', 'superadmin'])): ?>
+                <a href="<?php echo base_url('/posts'); ?>" class="nav-item nav-link">Kelola Artikel</a>
+            <?php endif; ?>
             <a href="<?php echo base_url('cadre'); ?>" class="nav-item nav-link">Profil Kader</a>
             <div class="nav-item dropdown">
                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Event</a>
@@ -237,65 +240,65 @@
 
 
     document.getElementById("registerForm").addEventListener("submit", function (e) {
-    e.preventDefault();
+        e.preventDefault();
 
-    let formData = new FormData(this);
+        let formData = new FormData(this);
 
-    fetch("<?= base_url('/registerProcess') ?>", {
-        method: "POST",
-        body: formData
-    })
-    .then(response => response.json())
-    .then(data => {
-        // Reset semua error message sebelumnya
-        document.querySelectorAll(".invalid-feedback").forEach(el => el.textContent = "");
-        document.querySelectorAll(".form-control").forEach(el => el.classList.remove("is-invalid"));
+        fetch("<?= base_url('/registerProcess') ?>", {
+            method: "POST",
+            body: formData
+        })
+            .then(response => response.json())
+            .then(data => {
+                // Reset semua error message sebelumnya
+                document.querySelectorAll(".invalid-feedback").forEach(el => el.textContent = "");
+                document.querySelectorAll(".form-control").forEach(el => el.classList.remove("is-invalid"));
 
-        if (data.error) {
-            // Menampilkan error di masing-masing kolom input
-            if (data.error.username) {
-                document.getElementById("errorUsername").textContent = data.error.username;
-                document.getElementById("registerUsername").classList.add("is-invalid");
-            }
-            if (data.error.nik) {
-                document.getElementById("errorNIK").textContent = data.error.nik;
-                document.getElementById("registerNIK").classList.add("is-invalid");
-            }
-            if (data.error.email) {
-                document.getElementById("errorEmail").textContent = data.error.email;
-                document.getElementById("registerEmail").classList.add("is-invalid");
-            }
-            if (data.error.password) {
-                document.getElementById("errorPassword").textContent = data.error.password;
-                document.getElementById("registerPassword").classList.add("is-invalid");
-            }
-            if (data.error.repeat_password) {
-                document.getElementById("errorRepeatPassword").textContent = data.error.repeat_password;
-                document.getElementById("registerRepeatPassword").classList.add("is-invalid");
-            }
-            if (data.error.name) {
-                document.getElementById("errorName").textContent = data.error.name;
-                document.getElementById("registerName").classList.add("is-invalid");
-            }
-            if (data.error.address) {
-                document.getElementById("errorAddress").textContent = data.error.address;
-                document.getElementById("registerAddress").classList.add("is-invalid");
-            }
-            if (data.error.education) {
-                document.getElementById("errorEducation").textContent = data.error.education;
-                document.getElementById("registerEducation").classList.add("is-invalid");
-            }
-            if (data.error.skills) {
-                document.getElementById("errorSkills").textContent = data.error.skills;
-                document.getElementById("registerSkills").classList.add("is-invalid");
-            }
-        } else {
-            alert("Registrasi berhasil! Silakan login.");
-            window.location.href = "<?= base_url('/') ?>";
-        }
-    })
-    .catch(error => console.error("Error:", error));
-});
+                if (data.error) {
+                    // Menampilkan error di masing-masing kolom input
+                    if (data.error.username) {
+                        document.getElementById("errorUsername").textContent = data.error.username;
+                        document.getElementById("registerUsername").classList.add("is-invalid");
+                    }
+                    if (data.error.nik) {
+                        document.getElementById("errorNIK").textContent = data.error.nik;
+                        document.getElementById("registerNIK").classList.add("is-invalid");
+                    }
+                    if (data.error.email) {
+                        document.getElementById("errorEmail").textContent = data.error.email;
+                        document.getElementById("registerEmail").classList.add("is-invalid");
+                    }
+                    if (data.error.password) {
+                        document.getElementById("errorPassword").textContent = data.error.password;
+                        document.getElementById("registerPassword").classList.add("is-invalid");
+                    }
+                    if (data.error.repeat_password) {
+                        document.getElementById("errorRepeatPassword").textContent = data.error.repeat_password;
+                        document.getElementById("registerRepeatPassword").classList.add("is-invalid");
+                    }
+                    if (data.error.name) {
+                        document.getElementById("errorName").textContent = data.error.name;
+                        document.getElementById("registerName").classList.add("is-invalid");
+                    }
+                    if (data.error.address) {
+                        document.getElementById("errorAddress").textContent = data.error.address;
+                        document.getElementById("registerAddress").classList.add("is-invalid");
+                    }
+                    if (data.error.education) {
+                        document.getElementById("errorEducation").textContent = data.error.education;
+                        document.getElementById("registerEducation").classList.add("is-invalid");
+                    }
+                    if (data.error.skills) {
+                        document.getElementById("errorSkills").textContent = data.error.skills;
+                        document.getElementById("registerSkills").classList.add("is-invalid");
+                    }
+                } else {
+                    alert("Registrasi berhasil! Silakan login.");
+                    window.location.href = "<?= base_url('/') ?>";
+                }
+            })
+            .catch(error => console.error("Error:", error));
+    });
 
 
 

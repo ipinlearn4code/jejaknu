@@ -35,7 +35,7 @@ $routes->get('/dataartikel', 'AdminController::dataartikel');
 
 $routes->resource('cadre', ['controller' => 'CadreProfileController']);
 $routes->resource('posts', [
-    'controller' => 'posts',
+    'controller' => 'PostController',
     // 'map' => [
     //     'myCustomAction' => 'myCustomAction'
     // ]

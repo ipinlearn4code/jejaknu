@@ -12,38 +12,31 @@ class PostController extends Controller
 
     public function __construct()
     {
-        // Get the logged in user's ID from the session
         $this->userId = session()->get('user_id');
-
-        // Instantiate the postModel once for all methods.
         $this->postModel = new PostModel();
     }
 
-    // Return all posts
     public function index()
     {
         $data['posts'] = $this->postModel->findAll();
-        return $data;
+        return view('posts/index', $data);
     }
 
-    // Return a single post by its id
     public function show($id = null)
     {
-        $post = $this->postModel->find($id);
-        if ($id === null || !$post) {
+        $data['post'] = $this->postModel->find($id);
+        if ($id === null || !$data) {
             return ['error' => 'Post not found'];
         }
-        return ['post' => $post];
+        return view('posts/show', $data);
     }
 
-    // Return latest published posts (limit 3)
     public function getLatestPosts()
     {
         $data = $this->postModel->getLatestPublishedPosts(3);
         return $data;
     }
     
-    // Return latest published news (limit 3)
     public function getLatestNews()
     {
         $data = $this->postModel->getLatestPublishedByCategory(3, 'news');
@@ -56,12 +49,12 @@ class PostController extends Controller
         return $data;
     }
 
-    // Create a new post and return the created post data
     public function store()
     {
         $rules = [
             'title'          => 'required|min_length[3]',
             'content'        => 'required',
+            'category'       => 'required',
             'featured_image' => 'uploaded[featured_image]|max_size[featured_image,1028]|is_image[featured_image]'
         ];
 
@@ -83,6 +76,8 @@ class PostController extends Controller
         $data = [
             'title'          => $this->request->getPost('title'),
             'content'        => $this->request->getPost('content'),
+            'user_id'        => $this->userId,
+            'category'       => $this->request->getPost('category'),
             'featured_image' => $imagePath,
             'status'         => $this->request->getPost('status') ?? 'draft'
         ];

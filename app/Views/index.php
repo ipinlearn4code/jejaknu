@@ -39,40 +39,11 @@ include('layouts/header.php');
         }
     </style>
 
-    <!-- Spinner End -->
-
-
-    <!-- Topbar Start -->
-    <!-- <div class="container-fluid bg-dark p-0 wow fadeIn" data-wow-delay="0.1s">
-        <div class="row gx-0 d-none d-lg-flex">
-            <div class="col-lg-7 px-5 text-start">
-                <div class="h-100 d-inline-flex align-items-center py-3 me-3">
-                    <a class="text-body px-2" href="tel:+0123456789"><i class="fa fa-phone-alt text-primary me-2"></i>+012 345 6789</a>
-                    <a class="text-body px-2" href="mailto:info@example.com"><i class="fa fa-envelope-open text-primary me-2"></i>info@example.com</a>
-                </div>
-            </div>
-            <div class="col-lg-5 px-5 text-end">
-                <div class="h-100 d-inline-flex align-items-center py-3 me-2">
-                    <a class="text-body px-2" href="">Terms</a>
-                    <a class="text-body px-2" href="">Privacy</a>
-                </div>
-                <div class="h-100 d-inline-flex align-items-center">
-                    <a class="btn btn-sm-square btn-outline-body me-1" href=""><i class="fab fa-facebook-f"></i></a>
-                    <a class="btn btn-sm-square btn-outline-body me-1" href=""><i class="fab fa-twitter"></i></a>
-                    <a class="btn btn-sm-square btn-outline-body me-1" href=""><i class="fab fa-linkedin-in"></i></a>
-                    <a class="btn btn-sm-square btn-outline-body me-0" href=""><i class="fab fa-instagram"></i></a>
-                </div>
-            </div>
-        </div>
-    </div> -->
-    <!-- Topbar End -->
-
+    
     <?php
     include('layouts/navbar.php');
     ?>
 
-
-    <!-- Carousel Start -->
     <!-- Carousel Start -->
     <div class="container-fluid p-0 pb-5 wow fadeIn" data-wow-delay="0.1s">
         <div class="owl-carousel header-carousel position-relative">
@@ -239,25 +210,27 @@ include('layouts/header.php');
     <section class="py-1 bg-light">
         <div class="container">
             <div class="text-center mb-3">
-                <h6 class="text-primary fw-semibold">Latest News</h6>
+                <h6 class="text-primary fw-semibold">Berita Terbaru</h6>
                 <h3 class="fw-bold">Stay Updated</h3>
             </div>
             <div class="row row-cols-1 row-cols-md-3 g-2">
 
                 <?php if (!empty($news) && is_array($news)): ?>
-                    <?php foreach ($news as $newsdisplay): ?>
+                    <?php foreach ($news as $newsItem): ?>
                         <div class="col">
-                            <div class="card border-0 shadow-sm rounded-pill h-100 news-card">
+                            <a href="<?= base_url('posts/' . $newsItem['id']) ?>" class="card border-0 shadow-sm rounded-pill h-100 news-card text-decoration-none">
+                            <!-- <div class="card border-0 shadow-sm rounded-pill h-100 news-card"> -->
                                 <!-- <img src="<//?= esc($post['featured_image']) ?>" class="card-img-top rounded-top-pill" alt="<//?= esc($post['title']) ?>"> -->
-                                <img src="<?= esc($newsdisplay['featured_image']) ?>" class="card-img-top rounded-top-pill"
-                                    alt="<?= esc($newsdisplay['title']) ?>">
+                                <img src="<?= esc($newsItem['featured_image']) ?>" class="card-img-top rounded-top-pill"
+                                    alt="<?= esc($newsItem['title']) ?>">
                                 <div class="card-body">
-                                    <h6 class="card-title fw-bold"><?= esc($newsdisplay['title']) ?></h6>
+                                    <h6 class="card-title fw-bold"><?= esc($newsItem['title']) ?></h6>
                                     <p class="card-text text-muted small">
-                                        <?= esc(word_limiter($newsdisplay['content'], 10)) ?>
+                                        <?= esc(word_limiter($newsItem['content'], 10)) ?>
                                     </p>
                                 </div>
-                            </div>
+                            <!-- </div> -->
+                            </a>
                         </div>
                     <?php endforeach; ?>
                 <?php else: ?>
