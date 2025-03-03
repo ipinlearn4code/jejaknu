@@ -1,8 +1,8 @@
 <!-- Navbar Start -->
 <nav class="navbar navbar-expand-lg bg-white navbar-light sticky-top py-lg-0 px-lg-5 wow fadeIn" data-wow-delay="0.1s">
-    <a href="/" class="navbar-brand ms-4 ms-lg-0">
+    <a href=<?= base_url('/') ?> class="navbar-brand ms-4 ms-lg-0">
 
-        <h1 class="m-0" style="color: #15B392;"><img class="me-3" src="img/icons/logonu.png" alt="Icon"
+        <h1 class="m-0" style="color: #15B392;"><img class="me-3" src=<?= base_url('img/icons/logonu.png') ?> alt="Icon"
                 width="100">JEJAKNU</h1>
 
     </a>
@@ -27,8 +27,9 @@
             <div class="nav-item dropdown">
                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Jejak Kabar</a>
                 <div class="dropdown-menu border-0 m-0">
-                    <a href="<?php echo base_url('/news'); ?>" class="dropdown-item">News</a>
-                    <a href="<?php echo base_url('/artikel'); ?>" class="dropdown-item">Artikel</a>
+                    <a href="<?php echo base_url('/posts/news'); ?>" class="dropdown-item">Berita</a>
+                    <a href="<?php echo base_url('/posts/article'); ?>" class="dropdown-item">Artikel</a>
+                    <a href="<?php echo base_url('/posts/new'); ?>" class="dropdown-item">Tulis Baru</a>
                 </div>
             </div>
         </div>
@@ -68,7 +69,6 @@
     </div>
 </div>
 
-<!-- Register Modal -->
 <!-- Register Modal -->
 <div class="modal fade" id="registerModal" tabindex="-1">
     <div class="modal-dialog">
@@ -132,88 +132,8 @@
     </div>
 </div>
 
-<!-- <div class="modal fade" id="registerModal" tabindex="-1">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Register</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-            </div>
-            <div class="modal-body">
-                <form id="registerForm">
-                    <div class="mb-3">
-                        <label>Username:</label>
-                        <input type="text" class="form-control" name="username" required>
-                    </div>
-                    <div class="mb-3">
-                        <label>Email:</label>
-                        <input type="email" class="form-control" name="email" required>
-                    </div>
-                    <div class="mb-3">
-                        <label>NIK:</label>
-                        <input type="text" class="form-control" name="nik" required>
-                    </div>
-                    <div class="mb-3">
-                        <label>Nama:</label>
-                        <input type="text" class="form-control" name="nama" required>
-                    </div>
-                    <div class="mb-3">
-                        <label>Alamat:</label>
-                        <textarea class="form-control" name="alamat" required></textarea>
-                    </div>
-                    <div class="mb-3">
-                        <label>Pendidikan Terakhir:</label>
-                        <select class="form-control" name="pendidikan" required>
-                            <option value="SD">SD</option>
-                            <option value="SMP">SMP</option>
-                            <option value="SMA">SMA</option>
-                            <option value="Diploma">Diploma</option>
-                            <option value="S1">S1</option>
-                            <option value="S2">S2</option>
-                            <option value="S3">S3</option>
-                        </select>
-                    </div>
-                    <div class="mb-3">
-                        <label>Keahlian:</label>
-                        <input type="text" class="form-control" name="keahlian" required>
-                    </div>
-                    <div class="mb-3">
-                        <label>Password:</label>
-                        <input type="password" class="form-control" id="registerPassword" name="password" required>
-                    </div>
-                    <div class="mb-3">
-                        <label>Repeat Password:</label>
-                        <input type="password" class="form-control" id="repeatPassword" required>
-                    </div>
-                    <button type="submit" class="btn btn-success w-100">Register</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div> -->
-
-
 <script>
-    // document.getElementById("loginForm").addEventListener("submit", function (e) {
-    //     e.preventDefault();
 
-    //     let formData = new FormData(this);
-
-    //     fetch("<//?= base_url('/loginProcess') ?>", {
-    //         method: "POST",
-    //         body: formData
-    //     })
-    //         .then(response => response.json())
-    //         .then(data => {
-    //             if (data.error) {
-    //                 alert(data.error);
-    //             } else {
-    //                 alert("Login berhasil!");
-    //                 window.location.href = data.redirect;
-    //             }
-    //         })
-    //         .catch(error => console.error("Error:", error));
-    // });
     document.getElementById("loginForm").addEventListener("submit", function (e) {
         e.preventDefault();
 

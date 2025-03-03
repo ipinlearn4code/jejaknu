@@ -100,39 +100,6 @@ class AuthController extends BaseController
     }
 
 
-
-
-    // public function loginProcess()
-    // {
-    //     $userModel = new UserModel();
-    //     $email = $this->request->getPost('email');
-    //     $password = $this->request->getPost('password');
-
-    //     $user = $userModel->where('email', $email)->first();
-
-    //     // // Cek email dan password
-    //     if (!$user || md5($password) !== $user['password']) {
-    //         return $this->response->setJSON(['error' => 'Email atau password salah'])->setStatusCode(400);
-    //     }
-
-
-    //     // Set session
-    //     session()->set([
-    //         'user_id' => $user['id'],
-    //         'email' => $user['email'],
-    //         'role' => $user['role'],
-    //         'logged_in' => true,
-    //     ]);
-    //     return view('vardump', ['data' => session()]);
-
-    //     // Redirect berdasarkan role
-    //     // if ($user['role'] === 'superadmin') {
-    //     //     return $this->response->setJSON(['redirect' => base_url('')]);
-    //     // } else if ($user['role'] === 'member') {
-    //     //     return $this->response->setJSON(['redirect' => base_url('/')]);
-    //     // }
-    // }
-
     public function loginProcess()
     {
         try {
@@ -155,9 +122,11 @@ class AuthController extends BaseController
             // Set session
             session()->set([
                 'user_id' => $user['id'],
+                'username' => $user['username'],
                 'email' => $user['email'],
                 'role' => $user['role'],
                 'logged_in' => true,
+                'logged_in_at' => time(),
             ]);
 
             return $this->response->setJSON([

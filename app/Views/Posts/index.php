@@ -2,7 +2,7 @@
 <?= $this->include('layouts/navbar') ?>
 
 <div class="container mt-5">
-    <h2 class="text-center mb-4">News</h2>
+    <h2 class="text-center mb-4"><?= $title ?? 'News'; ?></h2>
     <p class="text-center text-muted">Kegiatan yang berlangsung secara berkala seperti pengajian, pelatihan, atau
         pertemuan kader.</p>
 

@@ -33,12 +33,14 @@ $routes->get('/datanews', 'AdminController::datanews');
 $routes->get('/dataartikel', 'AdminController::dataartikel');
 
 
-$routes->resource('cadre', ['controller' => 'CadreProfileController']);
+$routes->resource('cadre', [
+    'controller' => 'CadreProfileController'
+]);
+$routes->get('posts/news', 'PostController::news');
+$routes->get('posts/article', 'PostController::article');
+$routes->post('post/upload-image', 'PostController::uploadImage');
 $routes->resource('posts', [
     'controller' => 'PostController',
-    // 'map' => [
-    //     'myCustomAction' => 'myCustomAction'
-    // ]
 ]);
 
 
