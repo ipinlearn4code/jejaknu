@@ -1,0 +1,226 @@
+
+body {
+	font-family: "Open Sans", sans-serif;
+}
+h2 {
+	color: #000;
+	font-size: 32px;
+	font-weight: 400;
+	text-align: center;
+	position: relative;
+	margin: 30px 0 60px;
+}
+h2::after {
+	content: "";
+	width: 100px;
+	position: absolute;
+	margin: 0 auto;
+	height: 4px;
+	border-radius: 1px;
+	background: #1abc9c;
+	left: 0;
+	right: 0;
+	bottom: -20px;
+}
+
+
+/* Styling untuk Card */
+.custom-card {
+   background: #ebeaea!important;
+   border-radius: 20px !important;
+   box-shadow: 0 5px 12px rgba(0, 0, 0, 0.20) !important;
+
+   padding: 30px;
+   margin: 30px auto;
+   max-width: 1800px; /* Perlebar tampilan */
+   transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.custom-card:hover {
+   transform: translateY(-5px);
+   box-shadow: 0 6px 15px rgba(0, 0, 0, 0.20) !important;
+
+}
+
+/* Layout chat sejajar */
+.chat-container {
+   display: flex;
+   align-items: center; /* Posisikan sejajar */
+   gap: 15px; /* Beri jarak antar elemen */
+}
+
+/* Foto profil */
+.chat-container img {
+   width: 60px;
+   height: 60px;
+   border-radius: 50%;
+   border: 3px solid #1abc9c;
+}
+
+/* Form container */
+.chat-content {
+   flex-grow: 1; /* Form akan memenuhi sisa ruang */
+   display: flex;
+   align-items: center;
+   gap: 10px; /* Beri jarak antara textarea dan tombol */
+}
+
+/* Styling untuk textarea */
+.chat-content textarea {
+   width: 100%;
+   height: 60px;
+   border-radius: 10px;
+   resize: none;
+   padding: 20px;
+   border: 1px solid #ccc;
+   overflow: hidden;
+}
+
+/* Tombol kirim */
+.chat-content .send-btn button {
+   background-color: #1abc9c;
+   border: none;
+   padding: 10px 15px;
+   border-radius: 5px;
+   color: white;
+   transition: background 0.3s ease-in-out;
+   white-space: nowrap; /* Cegah tombol mengecil di layar kecil */
+}
+
+.chat-content .send-btn button:hover {
+   background-color: #1abc9c;
+}
+
+/* Responsiveness */
+@media (max-width: 768px) {
+   .custom-card {
+       max-width: 95%;
+   }
+
+   .chat-container {
+       flex-direction: column;
+       align-items: stretch;
+   }
+
+   .chat-content {
+       flex-direction: column;
+       align-items: stretch;
+   }
+
+   .chat-content .send-btn {
+       text-align: right;
+   }
+}
+
+
+/* Beri jarak antara navbar dan isi */
+.navbar {
+   margin-bottom: 20px;
+}
+
+/* Beri jarak antara isi testimonial dan footer */
+.container-lg {
+   padding-bottom: 50px;
+}
+
+/* Beri jarak antar testimonial */
+.testimonial-wrapper {
+   margin-bottom: 30px;
+}
+
+/* Beri jarak sebelum footer */
+footer {
+   margin-top: 50px;
+}
+.carousel .testimonial-wrapper {
+    padding: 10px;
+    text-align: left;
+}
+
+.carousel .testimonial {
+    font-size: 14px; /* Sesuaikan ukuran teks */
+    padding: 10px;
+}
+
+.testimonial-wrapper {
+   margin-top: 30px; /* Menambahkan jarak antara judul dan testimonial */
+}
+
+
+.carousel .carousel-item {
+	color: #999;
+	overflow: hidden;
+	min-height: 120px;
+	font-size: 16px;
+}
+.carousel .media {
+	position: relative;
+	padding: 0 0 0 20px;
+}
+.carousel .media img {
+	width: 75px;
+	height: 75px;
+	display: block;
+	border-radius: 50%;
+}
+.carousel .testimonial-wrapper {
+	padding: 0 10px;
+}
+.carousel .testimonial {
+	color: #808080;
+	position: relative;
+	padding: 15px;
+	background: #f1f1f1;
+	border: 1px solid #efefef;
+	border-radius: 3px;
+	margin-bottom: 15px;
+}
+.carousel .testimonial::after {
+	content: "";
+	width: 15px;
+	height: 15px;
+	display: block;
+	background: #f1f1f1;
+	border: 1px solid #efefef;
+	border-width: 0 0 1px 1px;
+	position: absolute;
+	bottom: -8px;
+	left: 46px;
+	transform: rotateZ(-46deg);
+}
+.carousel .star-rating li {
+	padding: 0 2px;
+}
+.carousel .star-rating i {
+	font-size: 25px;
+	color: #ffdc12;
+}
+.carousel .overview {
+	padding: 3px 0 0 15px;
+}
+.carousel .overview .details {
+	padding: 5px 0 8px;
+}
+.carousel .overview b {
+	text-transform: uppercase;
+	color: #1abc9c;
+}
+.carousel .carousel-indicators {
+	bottom: -70px;
+}
+.carousel-indicators li, .carousel-indicators li.active {
+	width: 20px;
+	height: 20px;
+	border-radius: 50%;
+	margin: 1px 2px;
+	box-sizing: border-box;
+}
+.carousel-indicators li {	
+	background: #e2e2e2;
+	border: 4px solid #fff;
+}
+.carousel-indicators li.active {
+	color: #fff;
+	background: #1abc9c;
+	border: 5px double;    
+}
