@@ -42,7 +42,7 @@ $routes->post('post/upload-image', 'PostController::uploadImage');
 $routes->resource('posts', [
     'controller' => 'PostController',
 ]);
-
+$routes->resource('sejawat', ['controller' => 'SejawatController']);
 
 
 
