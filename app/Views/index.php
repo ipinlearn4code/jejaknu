@@ -39,7 +39,7 @@ include('layouts/header.php');
         }
     </style>
 
-    
+
     <?php
     include('layouts/navbar.php');
     ?>
@@ -49,20 +49,24 @@ include('layouts/header.php');
         <div class="owl-carousel header-carousel position-relative">
             <?php if (!empty($articles) && is_array($articles)): ?>
                 <?php foreach ($articles as $item): ?>
-                    <div class="owl-carousel-item position-relative" data-dot="<img src='<?= esc($item['featured_image']) ?>'>">
-                        <img class="img-fluid carousel-img" src="<?= esc($item['featured_image']) ?>"
-                            alt="<?= esc($item['title']) ?>">
+                    <?php
+                    preg_match('/<img[^>]+src="([^"]+)"/i', $item['content'], $matches);
+                    $imageSrc = $matches[1] ?? base_url('img/default.jpg'); // Gunakan default jika tidak ada gambar
+                    ?>
+
+                    <div class="owl-carousel-item position-relative" data-dot="<img src='<?= $item['featured_image'] ?>'>">
+                        <img class="img-fluid carousel-img" src="<?= $imageSrc ?>" alt="<?= esc($item['title']) ?>">
                         <div class="owl-carousel-inner">
                             <div class="container">
                                 <div class="row justify-content-start">
                                     <div class="col-10 col-lg-8">
                                         <h1 class="display-4 text-white animated slideInDown"><?= esc($item['title']) ?></h1>
                                         <p class="fs-6 fw-medium text-white mb-3 pb-2">
-                                            <?= esc(word_limiter($item['content'], 20)) ?>
+                                            <?= word_limiter(strip_tags($item['content']), 30) ?>
                                         </p>
-                                        <a href="<?= base_url('posts/show/' . $item['id']) ?>"
+                                        <a href="<?= base_url('posts/' . $item['id']) ?>"
                                             class="btn btn-primary py-2 px-4 animated slideInLeft">
-                                            Read More
+                                            Baca Selengkapnya
                                         </a>
                                     </div>
                                 </div>
@@ -88,6 +92,7 @@ include('layouts/header.php');
             <?php endif; ?>
         </div>
     </div>
+
 
     <!-- Carousel End -->
 
@@ -218,21 +223,27 @@ include('layouts/header.php');
                 <?php if (!empty($news) && is_array($news)): ?>
                     <?php foreach ($news as $newsItem): ?>
                         <div class="col">
-                            <a href="<?= base_url('posts/' . $newsItem['id']) ?>" class="card border-0 shadow-sm rounded-pill h-100 news-card text-decoration-none">
-                            <!-- <div class="card border-0 shadow-sm rounded-pill h-100 news-card"> -->
-                                <!-- <img src="<//?= esc($post['featured_image']) ?>" class="card-img-top rounded-top-pill" alt="<//?= esc($post['title']) ?>"> -->
-                                <img src="<?= esc($newsItem['featured_image']) ?>" class="card-img-top rounded-top-pill"
-                                    alt="<?= esc($newsItem['title']) ?>">
+                            <a href="<?= base_url('posts/' . $newsItem['id']) ?>"
+                                class="card border-0 shadow-sm rounded-pill h-100 news-card text-decoration-none">
+                                <?php
+                                // Ambil gambar pertama dari content
+                                preg_match('/<img.*?src=["\'](.*?)["\']/', $newsItem['content'], $matches);
+                                $contentImage = $matches[1] ?? null;
+                                ?>
+
+                                <img src="<?= $contentImage ?: esc($newsItem['featured_image']) ?>"
+                                    class="card-img-top rounded-top-pill" alt="<?= esc($newsItem['title']) ?>">
+
                                 <div class="card-body">
                                     <h6 class="card-title fw-bold"><?= esc($newsItem['title']) ?></h6>
                                     <p class="card-text text-muted small">
-                                        <?= esc(word_limiter($newsItem['content'], 10)) ?>
+                                        <?= word_limiter(strip_tags($newsItem['content']), 10) ?>
                                     </p>
                                 </div>
-                            <!-- </div> -->
                             </a>
                         </div>
                     <?php endforeach; ?>
+
                 <?php else: ?>
                     <div class="col">
                         <p>No posts available at the moment.</p>

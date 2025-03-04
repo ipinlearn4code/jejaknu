@@ -26,7 +26,7 @@ $routes->post('/loginProcess', 'AuthController::loginProcess');
 $routes->get('/logout', 'AuthController::logout');
 
 // Route admin (cek role)
-$routes->get('/datakader', 'AdminController::datakader', ['filter' => 'authAdmin']);
+// $routes->get('/datakader', 'AdminController::datakader', ['filter' => 'authAdmin']);
 $routes->get('/dataeventspesial', 'AdminController::dataeventspesial');
 $routes->get('/dataeventrutin', 'AdminController::dataeventrutin');
 $routes->get('/datanews', 'AdminController::datanews');
@@ -36,9 +36,13 @@ $routes->get('/dataartikel', 'AdminController::dataartikel');
 $routes->resource('cadre', [
     'controller' => 'CadreProfileController'
 ]);
+$routes->get('posts/reload', 'PostController::reloadPosts');
+
 $routes->get('posts/news', 'PostController::news');
 $routes->get('posts/article', 'PostController::article');
 $routes->post('post/upload-image', 'PostController::uploadImage');
+$routes->get('post/publish/(:num)', 'PostController::publish/$1', ['filter' => 'adminFilter']);
+$routes->get('post/archive/(:num)', 'PostController::archive/$1', ['filter' => 'adminFilter']);
 $routes->resource('posts', [
     'controller' => 'PostController',
 ]);

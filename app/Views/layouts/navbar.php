@@ -27,9 +27,12 @@
             <div class="nav-item dropdown">
                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Jejak Kabar</a>
                 <div class="dropdown-menu border-0 m-0">
+                    <a href="<?php echo base_url('/sejawat'); ?>" class="dropdown-item">Kabar Sejawat</a>
                     <a href="<?php echo base_url('/posts/news'); ?>" class="dropdown-item">Berita</a>
                     <a href="<?php echo base_url('/posts/article'); ?>" class="dropdown-item">Artikel</a>
-                    <a href="<?php echo base_url('/posts/new'); ?>" class="dropdown-item">Tulis Baru</a>
+                    <?php if (session()->get('logged_in')): ?>
+                        <a href="<?= base_url('/posts/new') ?>" class="dropdown-item">Tulis Baru</a>
+                    <?php endif; ?>
                 </div>
             </div>
         </div>

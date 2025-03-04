@@ -10,6 +10,9 @@ class PostModel extends Model
     protected $primaryKey = 'id';
     protected $allowedFields = ['title', 'content', 'featured_image', 'status', 'category'];
 
+    protected $useTimestamps = true;
+    protected $dateFormat = 'datetime';
+
     /**
      * Ambil postingan terbaru dengan status 'published'
      *

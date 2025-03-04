@@ -49,7 +49,7 @@ class PostController extends Controller
         return view('posts/create');
     }
 
-    public function show($id = null)
+    public function show($id)
     {
         $data['post'] = $this->postModel->find($id);
         if ($id === null || !$data) {
@@ -92,45 +92,6 @@ class PostController extends Controller
     }
 
 
-    // public function store()
-    // {
-    //     $rules = [
-    //         'title' => 'required|min_length[3]',
-    //         'content' => 'required',
-    //         'category' => 'required',
-    //         // 'featured_image' => 'uploaded[featured_image]|max_size[featured_image,1028]|is_image[featured_image]'
-    //     ];
-
-    //     if (!$this->validate($rules)) {
-    //         return ['errors' => $this->validator->getErrors()];
-    //     }
-
-    //     // Handle file upload for featured image
-    //     $file = $this->request->getFile('featured_image');
-    //     if ($file && $file->isValid() && !$file->hasMoved()) {
-    //         // Build a unique filename using random name, user id and title
-    //         $newName = $file->getRandomName() . '_' . $this->userId . '_' . url_title($this->request->getPost('title'));
-    //         $file->move(WRITEPATH . '../public/uploads', $newName);
-    //         $imagePath = '/uploads/' . $newName;
-    //     } else {
-    //         $imagePath = null;
-    //     }
-
-    //     $data = [
-    //         'title' => $this->request->getPost('title'),
-    //         'content' => $this->request->getPost('content'),
-    //         'user_id' => $this->userId,
-    //         'category' => $this->request->getPost('category'),
-    //         'featured_image' => $imagePath,
-    //         'status' => $this->request->getPost('status') ?? 'draft'
-    //     ];
-
-    //     $this->postModel->save($data);
-    //     $data['id'] = $this->postModel->getInsertID();
-
-    //     return $data;
-    // }
-
     public function create()
     {
         $rules = [
@@ -153,8 +114,8 @@ class PostController extends Controller
 
         $this->postModel->insert($data);
         $id['id'] = $this->postModel->getInsertID();
-        dd($data);
-        return view('posts/show', $id);
+        $data['post'] = $this->postModel->find($id['id']);
+        return view('posts/show', $data);
     }
 
     // Update an existing post and return updated data
@@ -205,16 +166,66 @@ class PostController extends Controller
     public function delete($id = null)
     {
         if ($id === null || !$this->postModel->find($id)) {
-            return ['error' => 'Post not found'];
+            return $this->response->setJSON(['error' => 'Post not found']);
         }
 
-        // Optionally: delete the image file if it exists
+        // Ambil data post sebelum dihapus
         $existingPost = $this->postModel->find($id);
-        if (!empty($existingPost['featured_image']) && file_exists(FCPATH . $existingPost['featured_image'])) {
-            unlink(FCPATH . $existingPost['featured_image']);
+
+        // 1. **Hapus featured image (jika ada)**
+        if (!empty($existingPost['featured_image'])) {
+            $featuredImagePath = FCPATH . $existingPost['featured_image'];
+            if (file_exists($featuredImagePath)) {
+                unlink($featuredImagePath);
+            }
         }
 
+        // 2. **Hapus semua gambar dalam konten post (jika ada)**
+        preg_match_all('/<img.*?src=["\'](.*?)["\']/i', $existingPost['content'], $matches);
+        if (!empty($matches[1])) {
+            foreach ($matches[1] as $imagePath) {
+                $fullImagePath = FCPATH . parse_url($imagePath, PHP_URL_PATH);
+                if (file_exists($fullImagePath)) {
+                    unlink($fullImagePath);
+                }
+            }
+        }
+
+        // 3. **Hapus post dari database**
         $this->postModel->delete($id);
-        return ['message' => 'Post deleted successfully'];
+
+        return $this->response->setJSON(['message' => 'Post deleted successfully']);
     }
+
+
+    public function publish($id)
+    {
+        $post = $this->postModel->find($id);
+        if (!$post) {
+            return $this->response->setJSON(['error' => 'Post tidak ditemukan'])->setStatusCode(404);
+        }
+
+        $this->postModel->update($id, ['status' => 'published']);
+
+        return $this->response->setJSON(['success' => 'Post berhasil dipublikasikan.']);
+    }
+
+    public function archive($id)
+    {
+        $post = $this->postModel->find($id);
+        if (!$post) {
+            return $this->response->setJSON(['error' => 'Post tidak ditemukan'])->setStatusCode(404);
+        }
+
+        $this->postModel->update($id, ['status' => 'archived']);
+
+        return $this->response->setJSON(['success' => 'Post berhasil diarsipkan.']);
+    }
+
+    public function reloadPosts()
+    {
+        $posts = $this->postModel->findAll();
+        return view('posts/list', ['posts' => $posts]);
+    }
+
 }
