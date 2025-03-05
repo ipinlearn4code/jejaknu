@@ -160,7 +160,18 @@ include('layouts/header.php');
                             <h3 class="mb-0">Untuk Umat</h3>
                         </div>
                     </div>
-                    <a class="btn btn-primary py-3 px-5" href="">Selengkapnya</a>
+                    <div class="d-flex align-items-center mb-5">
+                        <div class="d-flex flex-shrink-0 align-items-center justify-content-center border border-5 border-primary"
+                            style="width: 120px; height: 120px;">
+                            <h1 class="display-1 mb-n2" data-toggle="counter-up"><?php echo $cadreCount;?></h1>
+                        </div>
+                        <div class="ps-4">
+                            <h3>Kader</h3>
+                            <h3>Aktif</h3>
+                            <h3 class="mb-0">Kota Malang</h3>
+                        </div>
+                    </div>
+                    <!-- <a class="btn btn-primary py-3 px-5" href="">Selengkapnya</a> -->
                 </div>
             </div>
         </div>

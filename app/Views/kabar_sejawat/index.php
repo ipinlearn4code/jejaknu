@@ -35,22 +35,25 @@
         <h2 class="text-center">Kabar Sejawat</h2>
         <!-- Formulir untuk mengirim pesan -->
 
-        <form action="<?= base_url('kabar'); ?>" method="post">
-            <div class="card shadow-sm p-3 border-0 custom-card">
-                <div class="chat-container">
-                    <img src="<?= 'https://api.dicebear.com/9.x/pixel-art/svg?seed=' . session()->get('username'); ?>"
-                        alt="Profile Picture">
-                    <div class="chat-content">
-                        <textarea class="form-control" id="message" name="message" rows="2"
-                            placeholder="Tulis pesan atau kabar Anda..."></textarea>
-                        <div class="send-btn">
-                            <button type="submit" class="btn btn-primary">Kirim</button>
+        <?php if (session()->has('user_id')): ?>
+            <form action="<?= base_url('kabar'); ?>" method="post">
+                <div class="card shadow-sm p-3 border-0 custom-card">
+                    <div class="chat-container">
+                        <img src="<?= 'https://api.dicebear.com/9.x/pixel-art/svg?seed=' . session()->get('username'); ?>"
+                            alt="Profile Picture">
+                        <div class="chat-content">
+                            <textarea class="form-control" id="message" name="message" rows="2"
+                                placeholder="Tulis pesan atau kabar Anda..."></textarea>
+                            <div class="send-btn">
+                                <button type="submit" class="btn btn-primary">Kirim</button>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </form>
-
+            </form>
+        <?php else: ?>
+            <div class="alert alert-primary text-center" role="alert">Login untuk ikut memberi kabar!</div>
+        <?php endif; ?>
 
 
         <div id="myCarousel" class="carousel slide" data-ride="carousel">
