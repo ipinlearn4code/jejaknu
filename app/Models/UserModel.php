@@ -15,16 +15,17 @@ class UserModel extends Model
         'email',
         'password_hash',
         'role',
+        'avatar',
         'created_at',
         'updated_at',
     ];
 
     protected $useTimestamps = true; 
-    public function findByEmail(string $email)
+    
+    public function login(string $email)
     {
-        return $this->where('email', $email)->first();
+        return $this->where('email', $email)->orWhere('username', $email)->first();
     }
-
     protected $validationRules = [
         'username' => 'required|is_unique[users.username]',
         'email' => 'required|valid_email|is_unique[users.email]',

@@ -16,18 +16,13 @@
                 <a href="<?php echo base_url('/posts'); ?>" class="nav-item nav-link">Kelola Artikel</a>
             <?php endif; ?>
             <a href="<?php echo base_url('cadre'); ?>" class="nav-item nav-link">Profil Kader</a>
-            <div class="nav-item dropdown">
-                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Event</a>
-                <div class="dropdown-menu border-0 m-0">
-                    <a href="<?php echo base_url('/eventRutin'); ?>" class="dropdown-item">Rutin</a>
-                    <a href="<?php echo base_url('/ eventSpesial'); ?>" class="dropdown-item">Spesial</a>
-                </div>
-            </div>
+            <a href="<?php echo base_url('/events'); ?>" class="nav-item nav-link">Acara</a>
+
 
             <div class="nav-item dropdown">
                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Jejak Kabar</a>
                 <div class="dropdown-menu border-0 m-0">
-                    <a href="<?php echo base_url('/sejawat'); ?>" class="dropdown-item">Kabar Sejawat</a>
+                    <a href="<?php echo base_url('/kabar'); ?>" class="dropdown-item">Kabar Sejawat</a>
                     <a href="<?php echo base_url('/posts/news'); ?>" class="dropdown-item">Berita</a>
                     <a href="<?php echo base_url('/posts/article'); ?>" class="dropdown-item">Artikel</a>
                     <?php if (session()->get('logged_in')): ?>

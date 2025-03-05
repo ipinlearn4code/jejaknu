@@ -107,19 +107,16 @@ class AuthController extends BaseController
             $email = $this->request->getPost('email');
             $password = $this->request->getPost('password');
 
-            $user = $userModel->where('email', $email)->orWhere('username', $email)->first();
+            $user = $userModel->login($email);
 
-            // Cek apakah user ditemukan
             if (!$user) {
                 return $this->response->setJSON(['error' => 'Email tidak ditemukan'])->setStatusCode(400);
             }
 
-            // Cek password
             if (!password_verify($password, $user['password_hash'])) {
                 return $this->response->setJSON(['error' => 'Password salah'])->setStatusCode(400);
             }
 
-            // Set session
             session()->set([
                 'user_id' => $user['id'],
                 'username' => $user['username'],
@@ -129,6 +126,7 @@ class AuthController extends BaseController
                 'logged_in_at' => time(),
             ]);
 
+            
             return $this->response->setJSON([
                 'success' => true,
                 'redirect' => base_url('/')

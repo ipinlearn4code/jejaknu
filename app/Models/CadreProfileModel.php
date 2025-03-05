@@ -31,5 +31,10 @@ class CadreProfileModel extends Model
             'is_unique' => 'NIK sudah digunakan!'
         ]
     ];
+
+    public function findByUserId($userId)
+    {
+        return $this->where('user_id', $userId)->first();
+    }
     
 }

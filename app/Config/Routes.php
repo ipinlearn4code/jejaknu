@@ -43,10 +43,8 @@ $routes->get('posts/article', 'PostController::article');
 $routes->post('post/upload-image', 'PostController::uploadImage');
 $routes->get('post/publish/(:num)', 'PostController::publish/$1', ['filter' => 'adminFilter']);
 $routes->get('post/archive/(:num)', 'PostController::archive/$1', ['filter' => 'adminFilter']);
-$routes->resource('posts', [
-    'controller' => 'PostController',
-]);
-$routes->resource('sejawat', ['controller' => 'SejawatController']);
-
+$routes->resource('posts', ['controller' => 'PostController']);
+$routes->resource('kabar', ['controller' => 'KabarController']);
+$routes->resource('events', ['controller' => 'EventController']);    
 
 

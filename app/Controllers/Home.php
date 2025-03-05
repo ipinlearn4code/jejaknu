@@ -17,6 +17,6 @@ class Home extends BaseController
     }
     // public function index():String 
     // {
-    //     return view('form');
+    //     dd(session()->get());
     // }
 }

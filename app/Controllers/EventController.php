@@ -3,109 +3,122 @@
 namespace App\Controllers;
 
 use App\Models\EventModel;
-use CodeIgniter\RESTful\ResourceController;
+use App\Models\EventScheduleModel;
+use CodeIgniter\Controller;
 
-class EventController extends ResourceController
+class EventController extends Controller
 {
-    protected $modelName = 'App\Models\EventModel';
-    protected $format    = 'html'; // Change to 'json' if you plan to return JSON responses.
+    protected $eventModel;
+    protected $eventScheduleModel;
 
-    // GET /events
+    public function __construct()
+    {
+        $this->eventModel = new EventModel();
+        $this->eventScheduleModel = new EventScheduleModel();
+    }
+
     public function index()
     {
-        $data['events'] = $this->model->orderBy('created_at', 'DESC')->findAll();
-        return view('events/index', $data);
-    }
-    
-    public function eventRutin()
-    {
-        $data['events'] = $this->model->where('category', 'Rutin')->orderBy('created_at', 'DESC')->findAll();
-        return view('event/rutin', $data);
+        $specialEvents = $this->eventModel->where('event_type', 'special')->findAll();
+
+        foreach ($specialEvents as &$event) {
+            $schedule = $this->eventScheduleModel->where('event_id', $event['id'])->first();
+            $event['event_date'] = $schedule['event_date'] ?? null; // Pastikan ada event_date
+        }
+
+        $recurringEvents = $this->eventModel->where('event_type', 'recurring')->findAll();
+
+        foreach ($recurringEvents as &$event) {
+            $event['schedules'] = $this->eventScheduleModel->where('event_id', $event['id'])->findAll();
+        }
+        // dd($recurringEvents);
+
+        return view('events/index', [
+            'specialEvents' => $specialEvents,
+            'recurringEvents' => $recurringEvents
+        ]);
     }
 
-    public function eventSpesial()
-    {
-        $data['events'] = $this->model->where('category', 'Spesial')->orderBy('created_at', 'DESC')->findAll();
-        return view('event/spesial', $data);
-    }
-    // GET /events/new
+
     public function new()
     {
-        return view('events/new');
+        return view('events/form');
     }
 
-    // POST /events
     public function create()
     {
         $data = [
-            'name'        => $this->request->getPost('name'),
-            'date'        => $this->request->getPost('date'),
-            'location'    => $this->request->getPost('location'),
+            'title' => $this->request->getPost('title'),
             'description' => $this->request->getPost('description'),
-            'user_id'     => session()->get('user_id') // or retrieve the logged in user id
+            'location' => $this->request->getPost('location'),
+            'event_type' => $this->request->getPost('event_type'),
         ];
 
-        if (! $this->model->insert($data)) {
-            return redirect()->back()->withInput()->with('errors', $this->model->errors());
+        $this->eventModel->insert($data);
+        $eventId = $this->eventModel->insertID();
+
+        if ($data['event_type'] == 'special') {
+            $this->eventScheduleModel->insert([
+                'event_id' => $eventId,
+                'event_date' => $this->request->getPost('event_date'),
+            ]);
+        } else {
+            $this->eventScheduleModel->insert([
+                'event_id' => $eventId,
+                'recurrence_type' => $this->request->getPost('recurrence_type'),
+                'recurrence_day' => $this->request->getPost('recurrence_day'),
+                'recurrence_week' => $this->request->getPost('recurrence_week'),
+            ]);
         }
 
-        return redirect()->to('/events')->with('message', 'Event created successfully!');
+        return redirect()->to('/events')->with('success', 'Event berhasil ditambahkan!');
     }
 
-    // GET /events/{id}
-    public function show($id = null)
+    public function edit($id)
     {
-        $event = $this->model->find($id);
-        if (!$event) {
-            throw new \CodeIgniter\Exceptions\PageNotFoundException("Event with id $id not found.");
-        }
+        $event = $this->eventModel->find($id);
+        $schedule = $this->eventScheduleModel->where('event_id', $id)->first();
 
-        return view('events/show', ['event' => $event]);
+        return view('events/form', [
+            'event' => $event,
+            'schedule' => $schedule
+        ]);
     }
 
-    // GET /events/{id}/edit
-    public function edit($id = null)
+    public function update($id)
     {
-        $event = $this->model->find($id);
-        if (!$event) {
-            throw new \CodeIgniter\Exceptions\PageNotFoundException("Event with id $id not found.");
-        }
-
-        return view('events/edit', ['event' => $event]);
-    }
-
-    // PUT/PATCH /events/{id}
-    public function update($id = null)
-    {
-        $event = $this->model->find($id);
-        if (!$event) {
-            throw new \CodeIgniter\Exceptions\PageNotFoundException("Event with id $id not found.");
-        }
-
         $data = [
-            'name'        => $this->request->getPost('name'),
-            'date'        => $this->request->getPost('date'),
-            'location'    => $this->request->getPost('location'),
+            'title' => $this->request->getPost('title'),
             'description' => $this->request->getPost('description'),
-            // Usually, user_id remains unchanged
+            'location' => $this->request->getPost('location'),
+            'event_type' => $this->request->getPost('event_type'),
         ];
 
-        if (! $this->model->update($id, $data)) {
-            return redirect()->back()->withInput()->with('errors', $this->model->errors());
+        $this->eventModel->update($id, $data);
+        $this->eventScheduleModel->where('event_id', $id)->delete();
+
+        if ($data['event_type'] == 'special') {
+            $this->eventScheduleModel->insert([
+                'event_id' => $id,
+                'event_date' => $this->request->getPost('event_date'),
+            ]);
+        } else {
+            $this->eventScheduleModel->insert([
+                'event_id' => $id,
+                'recurrence_type' => $this->request->getPost('recurrence_type'),
+                'recurrence_day' => $this->request->getPost('recurrence_day'),
+                'recurrence_week' => $this->request->getPost('recurrence_week'),
+            ]);
         }
 
-        return redirect()->to('/events')->with('message', 'Event updated successfully!');
+        return redirect()->to('/events')->with('success', 'Event berhasil diperbarui!');
     }
 
-    // DELETE /events/{id}
-    public function delete($id = null)
+    public function delete($id)
     {
-        $event = $this->model->find($id);
-        if (!$event) {
-            throw new \CodeIgniter\Exceptions\PageNotFoundException("Event with id $id not found.");
-        }
+        $this->eventScheduleModel->where('event_id', $id)->delete();
+        $this->eventModel->delete($id);
 
-        $this->model->delete($id);
-        return redirect()->to('/events')->with('message', 'Event deleted successfully!');
+        return redirect()->to('/events')->with('success', 'Event berhasil dihapus!');
     }
 }
