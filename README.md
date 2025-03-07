@@ -73,5 +73,4 @@ Dokumentasi ini mencakup langkah-langkah instalasi, konfigurasi database, penggu
 
 ---
 **Dikembangkan oleh:**
-Alfan Miftahul Huda - Front End Engineer
-Alfred Rajendra Wijaya - Back end Engineer
+Alfan Miftahul Huda as Front End Dev | Alfred Rajendra Wijaya as Back end Dev
