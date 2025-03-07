@@ -1,68 +1,77 @@
-# CodeIgniter 4 Application Starter
 
-## What is CodeIgniter?
+# Dokumentasi Aplikasi JEJAKNU - Jejaring Kabar Pemuda NU
+![image](https://github.com/user-attachments/assets/dd91210e-054f-4be6-8d0a-63f036d811aa)
+![image](https://github.com/user-attachments/assets/59114f7a-b55c-4723-a212-70d43909011d)
 
-CodeIgniter is a PHP full-stack web framework that is light, fast, flexible and secure.
-More information can be found at the [official site](https://codeigniter.com).
 
-This repository holds a composer-installable app starter.
-It has been built from the
-[development repository](https://github.com/codeigniter4/CodeIgniter4).
+## Pendahuluan
+JEJAKNU adalah sebuah aplikasi berbasis web yang dikembangkan dengan tujuan untuk mengelola informasi terkait Nahdlatul Ulama (NU), termasuk artikel, profil kader, acara, dan berita.
 
-More information about the plans for version 4 can be found in [CodeIgniter 4](https://forum.codeigniter.com/forumdisplay.php?fid=28) on the forums.
+## Persyaratan Sistem
+Sebelum menginstal dan menjalankan aplikasi, pastikan sistem Anda memenuhi persyaratan berikut:
+- PHP 8.0 atau lebih baru
+- Composer
+- MySQL / MariaDB
+- Node.js (jika menggunakan frontend tambahan)
+- Web server (Apache/Nginx)
 
-You can read the [user guide](https://codeigniter.com/user_guide/)
-corresponding to the latest version of the framework.
+## Instalasi
+1. Clone repositori:
+   ```bash
+   git clone https://github.com/ipinlearn4code/jejaknu.git
+   cd jejaknu
+   ```
 
-## Installation & updates
+2. Instal dependensi menggunakan Composer:
+   ```bash
+   composer install
+   ```
 
-`composer create-project codeigniter4/appstarter` then `composer update` whenever
-there is a new release of the framework.
+3. Copy file `.env.example` menjadi `.env` dan atur konfigurasi database:
+   ```bash
+   cp .env.example .env
+   ```
 
-When updating, check the release notes to see if there are any changes you might need to apply
-to your `app` folder. The affected files can be copied or merged from
-`vendor/codeigniter4/framework/app`.
+4. Edit file `.env` dan sesuaikan bagian berikut:
+   ```ini
+   database.default.hostname = localhost
+   database.default.database = nama_database
+   database.default.username = user_database
+   database.default.password = password_database
+   database.default.DBDriver = MySQLi
+   ```
 
-## Setup
+## Menggunakan Database Migrations
+CodeIgniter 4 menyediakan fitur migrations untuk mengelola struktur database.
 
-Copy `env` to `.env` and tailor for your app, specifically the baseURL
-and any database settings.
+### Menjalankan Migrations
+Untuk menjalankan migrations, gunakan perintah berikut:
+```bash
+php spark migrate
+```
+Ini akan mengeksekusi semua file migration yang terdapat dalam folder `app/Database/Migrations`.
 
-## Important Change with index.php
+### Menjalankan Seeder
+Untuk mengisi database dengan data awal, gunakan seeder:
+```bash
+php spark db:seed CompleteSeeder
+```
+Pastikan `CompleteSeeder.php` sudah terisi dengan data yang dibutuhkan.
 
-`index.php` is no longer in the root of the project! It has been moved inside the *public* folder,
-for better security and separation of components.
+## Menjalankan Aplikasi
+Setelah konfigurasi selesai, jalankan aplikasi dengan perintah:
+```bash
+php spark serve
+```
+Aplikasi akan berjalan di `http://localhost:8080`.
 
-This means that you should configure your web server to "point" to your project's *public* folder, and
-not to the project root. A better practice would be to configure a virtual host to point there. A poor practice would be to point your web server to the project root and expect to enter *public/...*, as the rest of your logic and the
-framework are exposed.
+## Hak Akses & Role
+Aplikasi ini memiliki beberapa peran pengguna, seperti Admin, Editor, dan User biasa. Setiap peran memiliki hak akses yang berbeda dalam mengelola konten.
 
-**Please** read the user guide for a better explanation of how CI4 works!
+## Kesimpulan
+Dokumentasi ini mencakup langkah-langkah instalasi, konfigurasi database, penggunaan migration, dan menjalankan aplikasi. Jika terdapat kendala, silakan cek log error atau dokumentasi resmi CodeIgniter 4.
 
-## Repository Management
-
-We use GitHub issues, in our main repository, to track **BUGS** and to track approved **DEVELOPMENT** work packages.
-We use our [forum](http://forum.codeigniter.com) to provide SUPPORT and to discuss
-FEATURE REQUESTS.
-
-This repository is a "distribution" one, built by our release preparation script.
-Problems with it can be raised on our forum, or as issues in the main repository.
-
-## Server Requirements
-
-PHP version 8.1 or higher is required, with the following extensions installed:
-
-- [intl](http://php.net/manual/en/intl.requirements.php)
-- [mbstring](http://php.net/manual/en/mbstring.installation.php)
-
-> [!WARNING]
-> - The end of life date for PHP 7.4 was November 28, 2022.
-> - The end of life date for PHP 8.0 was November 26, 2023.
-> - If you are still using PHP 7.4 or 8.0, you should upgrade immediately.
-> - The end of life date for PHP 8.1 will be December 31, 2025.
-
-Additionally, make sure that the following extensions are enabled in your PHP:
-
-- json (enabled by default - don't turn it off)
-- [mysqlnd](http://php.net/manual/en/mysqlnd.install.php) if you plan to use MySQL
-- [libcurl](http://php.net/manual/en/curl.requirements.php) if you plan to use the HTTP\CURLRequest library
+---
+**Dikembangkan oleh:**
+Alfan Miftahul Huda - Front End Engineer
+Alfred Rajendra Wijaya - Back end Engineer
