@@ -1,6 +1,6 @@
 <?= $this->include('layouts/header') ?>
 <?= $this->include('layouts/navbar') ?>
-
+<link rel="stylesheet" href="css/style4.css">
 <!DOCTYPE html>
 <html lang="id">
 
@@ -14,16 +14,18 @@
 
     <?php $userRole = session()->get('role'); ?>
 
-    <div class="container-fluid mt-5">
-        <h2 class="text-center mb-4">Daftar Kader</h2>
-        <div class="d-flex justify-content-end mb-3">
-            <?php if ($userRole === 'superadmin'): ?>
-                <a href="<?= base_url('daftarkader') ?>" class="btn btn-primary">Tambah Kader</a>
-            <?php endif; ?>
-        </div>
+    <div class="header-kader">
+    <h2 class="judul-daftar-kader">Daftar Kader</h2>
+    <div class="tombol">
+        <?php if ($userRole === 'superadmin'): ?>
+            <a href="<?= base_url('daftarkader') ?>" class="btn btn-primary">Tambah Kader</a>
+        <?php endif; ?>
+    </div>
+</div>
+
         <div class="table-responsive">
-            <table class="table table-bordered table-striped w-100">
-                <thead class="table-dark">
+            <table class="table table-bordered">
+                <thead>
                     <tr>
                         <?php if ($userRole === 'superadmin'): ?>
                             <th>NIK</th>
