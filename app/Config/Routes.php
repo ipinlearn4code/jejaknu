@@ -47,4 +47,4 @@ $routes->resource('posts', ['controller' => 'PostController']);
 $routes->resource('kabar', ['controller' => 'KabarController']);
 $routes->resource('events', ['controller' => 'EventController']);    
 
-
+$routes->get('/profile-settings', 'UserController::index');
