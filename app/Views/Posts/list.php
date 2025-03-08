@@ -7,6 +7,8 @@
                 preg_match('/<img.*?src=["\'](.*?)["\']/', $post['content'], $matches);
                 $thumbnail = $matches[1] ?? null;
                 ?>
+                <link rel="stylesheet" href="css/style4.css">
+
                 <img src="<?= $thumbnail ?: base_url('default-thumbnail.jpg') ?>" class="event-img"
                     alt="<?= esc($post['title']); ?>">
                 <div class="card-body">
