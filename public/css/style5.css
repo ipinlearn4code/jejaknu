@@ -1,0 +1,91 @@
+
+/*Form edit event*/
+/* Kontainer Umum */
+.container {
+   width: 100%;
+   margin: auto;
+   padding: 20px;
+}
+
+/* Styling untuk Form */
+form {
+   background-color: #f9f9f9;
+   padding: 20px;
+   border-radius: 8px;
+   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+   width: 80%; /* Lebar form */
+   margin: auto;
+}
+
+/* Label Styling */
+label {
+   display: block;
+   margin-bottom: 5px;
+   font-weight: bold;
+   color: #555;
+}
+
+/* Input Styling */
+input[type="text"],
+input[type="date"],
+select,
+textarea {
+   width: 100%; 
+   padding: 10px;
+   margin-bottom: 15px;
+   border: 1px solid #ddd;
+   border-radius: 8px;
+   font-size: 16px;
+   box-sizing: border-box; /* Agar padding tidak menambah ukuran */
+   transition: border-color 0.3s;
+}
+
+input[type="text"]:focus,
+input[type="date"]:focus,
+select:focus,
+textarea:focus {
+   border-color: #15B392;
+   outline: none;
+}
+
+/* Styling untuk Tombol */
+button[type="submit"] {
+   background-color: #15B392;
+   color: white;
+   padding: 12px 20px;
+   border: none;
+   border-radius: 8px;
+   font-size: 16px;
+   cursor: pointer;
+   transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+   background-color: #128f79;
+}
+
+/* Styling untuk Pilihan Select */
+select {
+   appearance: none;
+   background-color: #ffffff;
+}
+
+/* Jarak antar elemen */
+#specialEventFields,
+#recurringEventFields {
+   margin-top: 10px;
+}
+
+/* Styling untuk Heading */
+/* Styling untuk Judul Form */
+.event-title {
+   display: block;
+   text-align: left;
+   margin-top: 20px;
+   margin-bottom: 0px ;
+   padding-left: 80px;
+   margin-left: 90px;
+}
+
+
+
