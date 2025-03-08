@@ -1,10 +1,14 @@
 <?= $this->include('layouts/header') ?>
 <?= $this->include('layouts/navbar') ?>
+<link rel="stylesheet" href="css/style4.css">
 
 <?php if (session()->get('role') === 'admin' || session()->get('role') === 'superadmin'): ?>
-    <p>
+    <div class="tombol-wrapper">
+    
+        
         <a href="<?= base_url('events/new') ?>" class="btn btn-primary">Buat Event Baru</a>
-    </p>
+    
+</div>
 <?php endif; ?>
 <h2>Event Spesial</h2>
 <ul>
@@ -30,7 +34,7 @@
                     </td>
                     <?php if (session()->get('role') === 'admin' || session()->get('role') === 'superadmin'): ?>
                         <td>
-                            <a href="<?= base_url('events/' . $event['id'] . '/edit') ?>" class="btn btn-primary">Edit</a>
+                            <a href="<?= base_url('events/' . $event['id'] . '/edit') ?>" class="btn btn-warning">Edit</a>
                             <a href="<?= base_url('events/' . $event['id'] . '/delete') ?>" class="btn btn-danger"
                                 onclick="return confirm('Apakah Anda yakin ingin menghapus event ini?')">Delete</a>
                         </td>
@@ -77,7 +81,7 @@
                 </td>
                 <?php if (session()->get('role') === 'admin' || session()->get('role') === 'superadmin'): ?>
                     <td>
-                        <a href="<?= base_url('events/' . $event['id'] . '/edit') ?>" class="btn btn-primary">Edit</a>
+                        <a href="<?= base_url('events/' . $event['id'] . '/edit') ?>" class="btn btn-warning">Edit</a>
                         <a href="<?= base_url('events/' . $event['id'] . '/delete') ?>" class="btn btn-danger"
                             onclick="return confirm('Apakah Anda yakin ingin menghapus event ini?')">Delete</a>
                     </td>
