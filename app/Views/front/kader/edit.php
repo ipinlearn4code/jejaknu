@@ -9,27 +9,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Data Kader </title>
       <!-- Pemanggilan CSS dengan base_url() -->
-      <link rel="stylesheet" href="<?= base_url('css/bootstrap.min.css') ?>">
-    <link rel="stylesheet" href="<?= base_url('css/style.css') ?>">
+     
+    <link rel="stylesheet" href="<?= base_url('css/style4.css') ?>">
 </head>
 
 <body>
 
     <?php $userRole = session()->get('role'); ?>
 
-    <div class="container-fluid mt-5">
-        <h2 class="text-center mb-4">Daftar Kader</h2>
-        <div class="d-flex justify-content-end mb-3">
+    <div class="header-kader">
+    <h2 class="judul-daftar-kader">Daftar Kader</h2>
+        <div class="tombol">
             <?php if ($userRole === 'superadmin'): ?>
                 <a href="<?= base_url('daftarkader') ?>" class="btn btn-primary">Tambah Kader</a>
             <?php endif; ?>
         </div>
+        </div>
         <div class="table-responsive">
-            <table class="table table-bordered table-striped w-100">
-                <thead class="table-dark">
+            <table class="table table-bordered ">
+                <thead>
                     <tr>
                         <?php if ($userRole === 'superadmin'): ?>
-                            <th>NIK</th>
+                        <th>NIK</th>
                         <?php endif; ?>
                         <th>Nama</th>
                         <th>Alamat</th>
