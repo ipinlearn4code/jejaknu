@@ -1,8 +1,9 @@
 <?= $this->include('layouts/header') ?>
 <?= $this->include('layouts/navbar') ?>
 
-<h2><?= isset($event) ? 'Edit Event' : 'Buat Event Baru' ?></h2>
 
+<h2 class="event-title"><?= isset($event) ? 'Edit Event' : 'Buat Event Baru' ?></h2>
+<link rel="stylesheet" href="<?= base_url('css/style5.css') ?>">
 <form method="post" action="<?= isset($event) ? base_url('events/' . $event['id'] . '/update') : base_url('events/') ?>">
     <input type="hidden" name="_method" value="<?= isset($event) ? 'PUT' : 'POST' ?>">
 
