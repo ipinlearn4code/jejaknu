@@ -9,6 +9,7 @@ class UserController extends BaseController
 {
     public function index()
     {
-        //
+        return view('/profile_settings');
     }
+    
 }
