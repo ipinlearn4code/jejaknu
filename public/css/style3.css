@@ -1,0 +1,144 @@
+ /* General Styles */
+    
+
+.container {
+    margin-top: 30px;
+}
+.container {
+margin-top: 30px;
+}
+
+/* Profile Navigation */
+.profile-nav .user-heading {
+    background: linear-gradient(135deg, rgb(249, 249, 249), rgb(202, 253, 219));
+    color: #fff;
+    padding: 30px;
+    text-align: center;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.profile-nav .user-heading img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 5px solid rgba(255, 255, 255, 0.5);
+    transition: transform 0.3s ease;
+    cursor: pointer;
+}
+
+
+.profile-nav .user-heading img:hover {
+    transform: scale(1.05);
+    opacity: 0.7;
+}
+
+.profile-nav ul {
+padding: 0;
+background: white;
+border-radius: 10px;
+box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.profile-nav ul li {
+border-bottom: 1px solid #eee;
+}
+
+.profile-nav ul li:last-child {
+border-bottom: none;
+}
+
+.profile-nav ul li a {
+display: block;
+padding: 12px 20px;
+color: #555;
+font-size: 16px;
+transition: all 0.3s;
+border-left: 4px solid transparent;
+}
+
+.user-heading p {
+color:  black; /* Ganti dengan warna yang diinginkan */
+font-size: 18px;
+margin-top: 1px;
+}
+
+
+/* Profile Information */
+.profile-info .panel {
+background: white;
+padding: 20px;
+border-radius: 10px;
+box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+.user-heading h1 {
+font-size: 24px; /* Ukuran teks nama */
+margin-top: 10px; /* Jarak atas */
+margin-bottom: 5px; /* Jarak bawah */
+}
+
+
+.bio-graph-info h1 {
+font-size: 25px;
+font-weight: 400;
+color: #333;
+text-align: center;
+
+}
+
+/* Form Styles */
+.form-control {
+border-radius: 8px;
+border: 1px solid #ddd;
+padding: 10px;
+font-size: 16px;
+transition: all 0.3s;
+}
+
+
+
+.btn-primary {
+background: #15B392;
+border: none;
+padding: 10px 20px;
+font-size: 16px;
+border-radius: 8px;
+color: white;
+transition: all 0.3s;
+}
+
+.btn-primary:hover {
+background:  #15B392;
+transform: scale(1.05);
+}
+
+
+.edit-icon {
+    position: absolute;
+    top: 33%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+.edit-icon i {
+    color: white;
+    font-size: 18px;
+}
+.profile-nav .user-heading:hover .edit-icon {
+    opacity: 1;
+}
+#file-input {
+    display: none;
+}
