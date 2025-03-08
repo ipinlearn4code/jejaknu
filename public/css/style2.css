@@ -41,6 +41,14 @@ h2::after {
    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.20) !important;
 
 }
+/* Form Styles */
+.form-control {
+	border-radius: 8px;
+	border: 1px solid #ddd;
+	padding: 10px;
+	font-size: 16px;
+	transition: all 0.3s;
+	}
 
 /* Layout chat sejajar */
 .chat-container {
