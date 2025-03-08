@@ -1,0 +1,170 @@
+/* Umum */
+
+
+.container {
+   width: 100%;
+   margin: auto;
+   padding: 0;
+}
+
+/* Tabel Utama */
+table {
+   width: 90% !important;  /* Menjaga lebar tabel tetap 80% */
+   border-collapse: collapse !important;
+   table-layout: fixed !important; /* Memastikan lebar kolom tetap */
+   margin: 0px auto  ; /* Menjaga tabel tetap di tengah */
+   
+}
+
+td, th {
+   padding: 9px !important;  /* Mengurangi padding agar tabel lebih kecil */
+   text-align: center;
+   overflow: hidden !important; /* Menghindari teks meluap dari kolom */
+   text-overflow: ellipsis !important; /* Menambahkan ... jika teks terlalu panjang */
+   white-space: nowrap !important; /* Mencegah teks dibungkus ke baris baru */
+}
+
+/* Menyesuaikan desain header */
+thead {
+   background-color: #15B392 !important;
+   color: white !important;
+   font-weight: bold !important;
+}
+
+/* Menyesuaikan lebar kolom header */
+th {
+   font-size: 14px !important;  /* Mengurangi ukuran font header */
+   padding: 10px !important;  /* Mengurangi padding header */
+}
+
+/* Menambah styling untuk baris tabel */
+tbody tr:nth-child(even) {
+   background-color: #f9f9f9 !important;
+}
+
+tbody tr:hover {
+   background-color: #d1f5ec !important;
+}
+
+/* Styling untuk kolom Jadwal (Event Rutin) */
+td {
+   max-width: 200px !important;  /* Batasi lebar kolom */
+   height: 35px !important;  /* Mengurangi tinggi sel */
+}
+
+/* Styling List dalam Tabel */
+ul {
+   list-style-type: none;
+   padding: 0;
+   margin: 0;
+   overflow: hidden !important; /* Mencegah daftar melampaui ukuran sel */
+   text-overflow: ellipsis !important;
+   white-space: nowrap !important;
+}
+
+ul li {
+   text-overflow: ellipsis !important;
+   overflow: hidden !important;
+}
+
+/* Styling Tombol */
+
+
+a.btn-primary {
+   background-color: #15B392 !important;
+   color: white !important;
+   border: none !important;
+}
+/* Form Styles */
+.form-control {
+   border-radius: 8px;
+   border: 1px solid #ddd;
+   padding: 10px;
+   font-size: 16px;
+   transition: all 0.3s;
+   }
+
+a.btn-primary:hover {
+   background-color: #128f79 !important;
+}
+
+a.btn-danger {
+   background-color: #dc3545 ;
+   color: white ;
+   border: none;
+}
+
+a.btn-danger:hover {
+   background-color: #bb2d3b ;
+}
+
+/* Styling Heading */
+h2 {
+   display: block;
+   text-align: left;
+   margin-top: 20px;
+   margin-bottom: 0px ;
+   padding-left: 80px;
+}
+.container-fluid h2 {
+   margin-bottom: 5px !important;
+}
+
+.container-fluid .table {
+   margin-top: 20 !important;
+}
+
+
+
+
+.header-kader {
+   display: flex;
+   justify-content: space-between; /* Menjaga jarak antara judul dan tombol */
+   align-items: center; /* Supaya judul dan tombol sejajar vertikal */
+   margin-bottom: 10px; /* Mengatur jarak antara header dan tabel */
+   margin-top: 50px;
+}
+
+.judul-daftar-kader {
+   margin: 0; /* Hilangkan margin default */
+   font-size: 30px;
+   font-weight: bold;
+}
+
+.tombol .btn {
+   padding: 8px 16px;
+   font-size: 16px;
+   margin-right: 90px;
+}
+.tombol-wrapper {
+   display: flex;
+   margin-left: 1450px; /* Geser ke kanan */
+   position: relative;
+   top: 50px; /* Jarak ke elemen di bawahnya */
+}
+
+
+/*button edit dan delete*/
+.btn-warning, .btn-danger {
+   padding: 8px 16px;
+   font-size: 14px;
+   font-weight: 500;
+   border: none;
+   border-radius: 8px; /* Sudut tumpul */
+   transition: transform 0.2s ease;
+   cursor: pointer;
+   outline: none;
+}
+
+/* Efek hover (tanpa mengubah warna) */
+.btn-warning:hover,
+.btn-danger:hover {
+   transform: translateY(-2px);
+   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Fokus untuk meningkatkan aksesibilitas */
+.btn-warning:focus,
+.btn-danger:focus {
+   box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.1);
+}
