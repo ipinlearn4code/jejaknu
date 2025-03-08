@@ -29,6 +29,27 @@ h6,
     font-weight: 400 !important;
 }
 
+  /* Styling Popup */
+  #profileOffcanvas {
+    height: 420px; /* Perpendek tinggi popup */
+    max-height: 90vh; /* Pastikan tidak melebihi layar */
+    width: 350px; /* Persempit lebar popup */
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+.btn-profile {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.profile-image {
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+}
 .back-to-top {
     position: fixed;
     display: none;
@@ -64,6 +85,7 @@ h6,
     color: #FFFFFF;
     background-color: #15B392; /* Warna latar belakang hijau */
     border-color: #15B392; 
+    border-radius: 8px;
 }
 
 .btn-square {
@@ -555,3 +577,11 @@ h6,
 .footer .copyright a:hover {
     color: var(--primary);
 }
+/* Form Styles */
+.form-control {
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    padding: 10px;
+    font-size: 16px;
+    transition: all 0.3s;
+    }
