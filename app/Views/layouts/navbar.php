@@ -4,41 +4,122 @@
 
         <h1 class="m-0" style="color: #15B392;"><img class="me-3" src=<?= base_url('img/icons/logonu.png') ?> alt="Icon"
                 width="100">JEJAKNU</h1>
+<style>
+    .nav-link.active,
+.dropdown-item.active {
+    color: #15B392 ; /* Warna biru (sesuaikan dengan tema) */
+}
 
+.nav-link,
+.dropdown-item {
+    color: #000 ; /* Warna default */
+}
+/* Override warna latar belakang dropdown-item aktif */
+.dropdown-item.active, 
+.dropdown-item:active {
+    background-color: transparent !important;
+   
+}
+
+</style>
     </a>
     <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarCollapse">
-        <div class="navbar-nav ms-auto p-4 p-lg-0">
-            <a href="<?php echo base_url('/dashboard'); ?>" class="nav-item nav-link active">Dashboard</a>
-            <?php if (in_array(session()->get('role'), ['admin', 'superadmin'])): ?>
-                <a href="<?php echo base_url('/posts'); ?>" class="nav-item nav-link">Kelola Artikel</a>
-            <?php endif; ?>
-            <a href="<?php echo base_url('cadre'); ?>" class="nav-item nav-link">Profil Kader</a>
-            <a href="<?php echo base_url('/events'); ?>" class="nav-item nav-link">Acara</a>
+    <div class="navbar-nav ms-auto p-4 p-lg-0">
+    <a href="<?= base_url('/dashboard'); ?>" 
+   class="nav-item nav-link <?= (rtrim(current_url(), '/') == rtrim(base_url('/dashboard'), '/') || rtrim(current_url(), '/') == rtrim(base_url(), '/')) ? 'active' : '' ?>">
+    Dashboard
+</a>
 
+        <?php if (in_array(session()->get('role'), ['admin', 'superadmin'])): ?>
+            <a href="<?php echo base_url('/posts'); ?>" 
+               class="nav-item nav-link <?= (current_url() == base_url('/posts')) ? 'active' : '' ?>">
+                Kelola Artikel
+            </a>
+        <?php endif; ?>
+        <a href="<?php echo base_url('/cadre'); ?>" 
+           class="nav-item nav-link <?= (current_url() == base_url('/cadre')) ? 'active' : '' ?>">
+            Profil Kader
+        </a>
+        <a href="<?php echo base_url('/events'); ?>" 
+           class="nav-item nav-link <?= (current_url() == base_url('/events')) ? 'active' : '' ?>">
+            Acara
+        </a>
 
-            <div class="nav-item dropdown">
-                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Jejak Kabar</a>
-                <div class="dropdown-menu border-0 m-0">
-                    <a href="<?php echo base_url('/kabar'); ?>" class="dropdown-item">Kabar Sejawat</a>
-                    <a href="<?php echo base_url('/sejawat'); ?>" class="dropdown-item">Kabar Sejawat</a>
-                    <a href="<?php echo base_url('/posts/news'); ?>" class="dropdown-item">Berita</a>
-                    <a href="<?php echo base_url('/posts/article'); ?>" class="dropdown-item">Artikel</a>
-                    <?php if (session()->get('logged_in')): ?>
-                        <a href="<?= base_url('/posts/new') ?>" class="dropdown-item">Tulis Baru</a>
-                    <?php endif; ?>
-                </div>
+        <div class="nav-item dropdown">
+            <a href="#" class="nav-link dropdown-toggle <?= (in_array(uri_string(), ['kabar', 'posts/news', 'posts/article', 'posts/new'])) ? 'active' : '' ?>" 
+               data-bs-toggle="dropdown">Jejak Kabar</a>
+            <div class="dropdown-menu border-0 m-0">
+                <a href="<?php echo base_url('/kabar'); ?>" 
+                   class="dropdown-item <?= (current_url() == base_url('/kabar')) ? 'active' : '' ?>">
+                    Kabar Sejawat
+                </a>
+                <a href="<?php echo base_url('/posts/news'); ?>" 
+                   class="dropdown-item <?= (current_url() == base_url('/posts/news')) ? 'active' : '' ?>">
+                    Berita
+                </a>
+                <a href="<?php echo base_url('/posts/article'); ?>" 
+                   class="dropdown-item <?= (current_url() == base_url('/posts/article')) ? 'active' : '' ?>">
+                    Artikel
+                </a>
+                <?php if (session()->get('logged_in')): ?>
+                    <a href="<?= base_url('/posts/new') ?>" 
+                       class="dropdown-item <?= (current_url() == base_url('/posts/new')) ? 'active' : '' ?>">
+                        Tulis Baru
+                    </a>
+                <?php endif; ?>
             </div>
         </div>
+    </div>
+</div>
+
         <?php if (session()->get('logged_in')): ?>
-            <a href="<?= base_url('/logout') ?>" class="btn py-2 px-4"
-                style="background-color: #15B392; color: white;">Logout</a>
-        <?php else: ?>
-            <button class="btn py-2 px-4" style="background-color: #15B392; color: white;" data-bs-toggle="modal"
-                data-bs-target="#loginModal">Login</button>
-        <?php endif; ?>
+  <!-- Tombol Profil -->
+<a href="javascript:void(0);" class="d-flex align-items-center text-decoration-none" id="profileBtn">
+    <img src="<?= session()->get('user_photo') ?: base_url('img/about-1.jpg') ?>" alt="Profile" class="rounded-circle" width="40" height="40">
+</a>
+
+<!-- Offcanvas Profile (Popup di Samping Kanan) -->
+<div class="offcanvas offcanvas-end" tabindex="-1" id="profileOffcanvas" aria-labelledby="profileOffcanvasLabel">
+    <div class="offcanvas-header">
+        <h5 id="profileOffcanvasLabel">Profile</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body d-flex flex-column align-items-center">
+        <button class="btn btn-secondary rounded-circle mb-3 p-0" style="height: 100px; width: 100px; display: flex; align-items: center; justify-content: center; overflow: hidden;">
+            <img src="<?= session()->get('user_photo') ?: base_url('img/about-1.jpg') ?>" class="rounded-circle" style="height: 100%; width: 100%; object-fit: cover;"/>
+        </button>
+        <span class="name fw-bold" style="font-size: 20px;">
+            <?= session()->get('user_name') ?: 'User Name' ?>
+        </span>
+        <span class="idd text-muted" style="font-size: 14px;">
+            @<?= session()->get('user_email') ?: 'useremail' ?>
+        </span>
+        
+        <div class="d-flex mt-3 w-100 px-3">
+            <a href="<?= base_url('/profile-settings') ?>" class="btn btn-dark text-white w-100 py-2 rounded-pill shadow-sm">Edit Profile</a>
+        </div>
+        <div class="d-flex mt-2 w-100 px-3">
+            <a href="<?= base_url('/logout') ?>" class="btn btn-danger text-white w-100 py-2 rounded-pill shadow-sm">Logout</a>
+        </div>
+    </div>
+</div>
+
+<?php else: ?>
+<!-- Tombol Login -->
+<button class="btn py-2 px-4" style="background-color: #15B392; color: white;" data-bs-toggle="modal" data-bs-target="#loginModal">Login</button>
+<?php endif; ?>
+
+<!-- Tambahkan JavaScript untuk Mencegah Popup Otomatis -->
+
+
+
+
+<!-- Tambahkan Bootstrap Icons dan FontAwesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
 </nav>
 
 <!-- Login Modal -->
@@ -124,7 +205,7 @@
                         <input type="text" class="form-control" id="registerSkills" name="skills" required>
                         <div class="invalid-feedback" id="errorSkills"></div>
                     </div>
-                    <button type="submit" class="btn btn-success w-100">Register</button>
+                    <button type="submit" class="btn btn-primary">Register</button>
                 </form>
             </div>
         </div>
@@ -132,6 +213,27 @@
 </div>
 
 <script>
+  
+
+  document.addEventListener("DOMContentLoaded", function () {
+    var offcanvasElement = document.getElementById("profileOffcanvas");
+    var profileBtn = document.getElementById("profileBtn");
+    var bsOffcanvas = new bootstrap.Offcanvas(offcanvasElement);
+
+    // Pastikan popup tidak muncul otomatis saat halaman dibuka
+    bsOffcanvas.hide();
+
+    // Event listener untuk menampilkan popup hanya saat tombol profile diklik
+    profileBtn.addEventListener("click", function () {
+        bsOffcanvas.show();
+    });
+
+    // Pastikan popup tidak terbuka otomatis ketika halaman "/profile-settings" dibuka
+    if (window.location.pathname === "/profile-settings") {
+        bsOffcanvas.hide();
+    }
+});
+
 
     document.getElementById("loginForm").addEventListener("submit", function (e) {
         e.preventDefault();
